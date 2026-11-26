@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Το Κρυμμένο Όπλο του Ήφαιστου: Η Αναζήτηση της Ασπίδας του Αχιλλέα</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Literata:opsz,wght@7..72,400..900&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#C84B31] selection:text-white">
+
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-[#D4AF37] focus:text-black focus:px-4 focus:py-2 focus:rounded">Μετάβαση στο κύριο περιεχόμενο</a>
+
+<header class="border-b border-[#D4AF37]/20 bg-[#161310]/95 backdrop-blur-md sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full border border-[#D4AF37] flex items-center justify-center bg-[#27221D] text-[#D4AF37] font-cinzel font-bold text-lg shadow-inner" aria-hidden="true">Η</div>
+      <div>
+        <h1 class="font-cinzel text-sm sm:text-base md:text-lg font-bold tracking-wider text-[#EFECE6]">ΤΟ ΚΡΥΜΜΕΝΟ ΟΠΛΟ ΤΟΥ ΗΦΑΙΣΤΟΥ</h1>
+        <p id="header-subtitle" class="text-[11px] sm:text-xs text-[#B8AFA1] tracking-wide">Αρχαιολογική &amp; Φιλολογική Αναζήτηση στην Ιλιάδα (Ραψωδία Σ)</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+      <button id="resume-btn" onclick="resumeGame()" class="hidden px-3 py-1.5 rounded-lg bg-[#4ADE80]/15 border border-[#4ADE80]/50 text-[#4ADE80] hover:border-[#4ADE80] text-xs font-medium flex items-center gap-1.5 transition" title="Συνέχιση αποθηκευμένης προόδου">▶ Συνέχιση</button>
+      <button id="change-level-btn" onclick="openLevelSelector()" class="hidden px-3 py-1.5 rounded-lg bg-[#27221D] border border-[#CD7F32]/50 text-[#E5B869] hover:border-[#D4AF37] text-xs font-medium flex items-center gap-1.5 transition" title="Επιλογή άλλης ηλικιακής βαθμίδας">
+        <span id="header-level-label">Επίπεδο</span><span class="text-[10px] opacity-75">⇄ Αλλαγή</span>
+      </button>
+      <div class="flex items-center gap-1.5 bg-[#12100E] px-2.5 sm:px-3 py-1.5 rounded-full border border-[#D4AF37]/25">
+        <span class="hidden sm:inline text-xs text-[#B8AFA1]">Ομόκεντροι Κύκλοι:</span>
+        <span id="header-progress-text" class="text-xs font-semibold text-[#D4AF37]" aria-live="polite">0 / 5</span>
+      </div>
+      <button onclick="toggleCodex()" class="btn-ghost-gold px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium flex items-center gap-2 relative" aria-label="Άνοιγμα σημειωματαρίου">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+        <span>Σημειωματάριο</span>
+        <span id="codex-badge" class="hidden w-2 h-2 rounded-full bg-[#C84B31] absolute -top-0.5 -right-0.5"></span>
+      </button>
+      <button id="sound-toggle-btn" onclick="toggleAudio()" title="Ήχοι Σφυρηλάτησης" aria-label="Εναλλαγή ήχου" aria-pressed="true" class="p-2 rounded-lg bg-[#27221D] border border-[#D4AF37]/25 text-[#B8AFA1] hover:text-[#D4AF37] transition">
+        <svg id="sound-icon-on" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+        <svg id="sound-icon-off" class="w-4 h-4 hidden text-[#C84B31]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path></svg>
+      </button>
+    </div>
+  </div>
+  <div class="meander-border w-full"></div>
+</header>
+
+<main id="main-content" class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+
+  <section id="intro-screen" class="max-w-5xl mx-auto relic-card rounded-2xl p-6 sm:p-10 text-center fade-in">
+    <div class="inline-block px-3 py-1 rounded-full bg-[#C84B31]/20 border border-[#C84B31]/50 text-[#E88D7A] text-xs font-medium tracking-widest uppercase mb-4">Αρχαιολογική Αποστολή • Τροία, 10ο Έτος του Πολέμου</div>
+    <h2 class="font-cinzel text-2xl sm:text-4xl font-bold text-[#D4AF37] mb-5 leading-tight">Η Αναζήτηση της Ηφαιστότευκτης Ασπίδας</h2>
+    <div class="font-serif-narrative text-sm sm:text-base text-[#EFECE6]/90 leading-relaxed space-y-3 text-left bg-[#12100E]/60 p-5 sm:p-6 rounded-xl border border-[#D4AF37]/15 mb-8">
+      <p>Μετά τον θάνατο του Πατρόκλου, η πανοπλία του Αχιλλέα έπεσε στα χέρια του Έκτορα. Τη νύχτα εκείνη, η θεά Θέτιδα ανέβηκε στον Όλυμπο και παρακάλεσε τον θεό της μεταλλουργίας, τον Ήφαιστο, να σφυρηλατήσει νέα όπλα για τον γιο της.</p>
+      <p>Ο θεός έριξε στη φωτιά χαλκό, κασσίτερο, χρυσό και ασήμι, δημιουργώντας μια <strong>πεντάπτυχη</strong> ασπίδα —ένα αμυντικό όπλο φτιαγμένο από πέντε επάλληλα μεταλλικά ελάσματα— πάνω στην οποία αποτύπωσε ολόκληρο το σύμπαν σε πέντε ομόκεντρους κύκλους.</p>
+    </div>
+    <div class="mb-4 text-left">
+      <h3 class="font-cinzel text-base sm:text-lg font-bold text-[#D4AF37] text-center mb-1">Επιλέξτε Επίπεδο Δυσκολίας &amp; Ηλικιακή Βαθμίδα</h3>
+      <p class="text-xs text-[#B8AFA1] text-center mb-6">Κάθε επίπεδο προσαρμόζει τους γρίφους, τη γλώσσα και τα ομηρικά τεκμήρια (μπορείτε να αλλάξετε επίπεδο ανά πάσα στιγμή).</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+        <div class="bg-[#12100E] border border-[#CD7F32]/40 hover:border-[#D4AF37] rounded-xl p-5 flex flex-col justify-between text-left transition group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2"><span class="px-2.5 py-0.5 rounded-full bg-[#CD7F32]/20 text-[#E5B869] text-[11px] font-semibold">Ηλικίες 10–13 ετών</span><span class="text-xs font-cinzel text-[#B8AFA1]">Επίπεδο Ι</span></div>
+            <h4 class="font-cinzel text-lg font-bold text-[#EFECE6] group-hover:text-[#D4AF37] transition mb-2">Μαθητευόμενοι του Ηφαίστου</h4>
+            <p class="text-xs text-[#B8AFA1] leading-relaxed mb-4">Περιπετειώδης ανακάλυψη με οπτικό εντοπισμό αστερισμών, ξεκάθαρα διλήμματα δικαιοσύνης, αντιστοίχιση των 4 εποχών με τα χρώματα των μετάλλων και συναρμολόγηση της ασπίδας.</p>
+          </div>
+          <button onclick="startGame('kids')" class="w-full btn-bronze py-2.5 px-4 rounded-lg font-cinzel font-bold text-xs sm:text-sm tracking-wide">Έναρξη (10–13 ετών)</button>
+        </div>
+        <div class="bg-[#12100E] border border-[#D4AF37]/40 hover:border-[#D4AF37] rounded-xl p-5 flex flex-col justify-between text-left transition group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2"><span class="px-2.5 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] text-[11px] font-semibold">Ηλικίες 14–18 ετών</span><span class="text-xs font-cinzel text-[#B8AFA1]">Επίπεδο ΙΙ</span></div>
+            <h4 class="font-cinzel text-lg font-bold text-[#EFECE6] group-hover:text-[#D4AF37] transition mb-2">Ερευνητές του Ομήρου</h4>
+            <p class="text-xs text-[#B8AFA1] leading-relaxed mb-4">Επαγωγική έρευνα πάνω στα ομηρικά αποσπάσματα: αειφανή άστρα, η δίκη της ποινής στην αγορά, τελετουργικά της σοδειάς, χορογραφία της Κνωσού και 5 μεταλλικές πτύχες.</p>
+          </div>
+          <button onclick="startGame('teens')" class="w-full btn-bronze py-2.5 px-4 rounded-lg font-cinzel font-bold text-xs sm:text-sm tracking-wide">Έναρξη (14–18 ετών)</button>
+        </div>
+        <div class="bg-[#12100E] border border-[#C84B31]/50 hover:border-[#D4AF37] rounded-xl p-5 flex flex-col justify-between text-left transition group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2"><span class="px-2.5 py-0.5 rounded-full bg-[#C84B31]/25 text-[#E88D7A] text-[11px] font-semibold">Ενήλικες &amp; Μελετητές</span><span class="text-xs font-cinzel text-[#B8AFA1]">Επίπεδο ΙΙΙ</span></div>
+            <h4 class="font-cinzel text-lg font-bold text-[#EFECE6] group-hover:text-[#D4AF37] transition mb-2">Μύστες του Εργαστηρίου</h4>
+            <p class="text-xs text-[#B8AFA1] leading-relaxed mb-4">Πλήρης φιλολογική και αρχαιομεταλλουργική προσέγγιση: αστρονομικός προσανατολισμός, ανάλυση του αμφίσημου χωρίου της δίκης (Σ 497–508), τεχνική νιέλλο και 5-βηματική χορογραφία.</p>
+          </div>
+          <button onclick="startGame('adults')" class="w-full btn-bronze py-2.5 px-4 rounded-lg font-cinzel font-bold text-xs sm:text-sm tracking-wide">Έναρξη (Ενήλικες)</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="game-workspace" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+    <div class="lg:col-span-5 relic-card rounded-2xl p-5 sm:p-6 flex flex-col items-center lg:sticky lg:top-24">
+      <div class="w-full flex items-center justify-between mb-3">
+        <span class="text-xs font-cinzel tracking-widest text-[#D4AF37] uppercase">Διάγραμμα Ασπίδας</span>
+        <span id="shield-status-label" class="text-xs text-[#B8AFA1]">Επίπεδο 1 από 5</span>
+      </div>
+      <div class="relative w-full max-w-[340px] aspect-square my-2 flex items-center justify-center">
+        <svg id="achilles-shield-svg" viewBox="0 0 400 400" class="w-full h-full drop-shadow-2xl" role="img" aria-label="Η ασπίδα του Αχιλλέα με πέντε ομόκεντρους κύκλους">
+          <defs>
+            <radialGradient id="grad-gold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFF0A5"/><stop offset="55%" stop-color="#D4AF37"/><stop offset="100%" stop-color="#8A6617"/></radialGradient>
+            <radialGradient id="grad-bronze" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#E6A15C"/><stop offset="70%" stop-color="#CD7F32"/><stop offset="100%" stop-color="#6E3B10"/></radialGradient>
+            <radialGradient id="grad-silver" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#FFFFFF"/><stop offset="65%" stop-color="#C0C5CE"/><stop offset="100%" stop-color="#65737E"/></radialGradient>
+            <radialGradient id="grad-ocean" cx="50%" cy="50%" r="50%"><stop offset="85%" stop-color="#1E3A5F"/><stop offset="95%" stop-color="#2B5876"/><stop offset="100%" stop-color="#D4AF37"/></radialGradient>
+          </defs>
+          <circle cx="200" cy="200" r="192" fill="#14110E" stroke="#3D352E" stroke-width="2"/>
+          <g id="svg-ring-4" class="shield-ring locked" onclick="inspectRing(4)">
+            <circle cx="200" cy="200" r="190" fill="url(#grad-ocean)" stroke="#D4AF37" stroke-width="4"/>
+            <circle cx="200" cy="200" r="170" fill="#14110E" stroke="#5A8BB0" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <text font-size="9" fill="#9CC4E4" font-family="Literata" letter-spacing="4"><textPath href="#ocean-text-path" startOffset="2%">ΩΚΕΑΝΟΣ ΠΟΤΑΜΟΣ • ΑΝΤΥΞ • ΑΣΠΙΣ ΑΧΙΛΛΕΩΣ • ΩΚΕΑΝΟΣ ΠΟΤΑΜΟΣ •</textPath></text>
+            <path id="ocean-text-path" d="M 200, 200 m -177, 0 a 177,177 0 1,1 354,0 a 177,177 0 1,1 -354,0" fill="none"/>
+          </g>
+          <g id="svg-ring-3" class="shield-ring locked" onclick="inspectRing(3)">
+            <circle cx="200" cy="200" r="166" fill="#2A1D17" stroke="#C84B31" stroke-width="2"/>
+            <circle cx="200" cy="200" r="134" fill="#14110E" stroke="#C84B31" stroke-width="1.5"/>
+            <g stroke="#E88D7A" stroke-width="1.5" fill="none"><circle cx="200" cy="200" r="150" stroke-dasharray="3 9"/><circle cx="200" cy="200" r="150" stroke-dasharray="1 11" stroke="#D4AF37" stroke-width="3"/></g>
+          </g>
+          <g id="svg-ring-2" class="shield-ring locked" onclick="inspectRing(2)">
+            <circle cx="200" cy="200" r="132" fill="url(#grad-bronze)" stroke="#E5B869" stroke-width="1.5"/>
+            <circle cx="200" cy="200" r="98" fill="#14110E" stroke="#E5B869" stroke-width="1.5"/>
+            <line x1="200" y1="68" x2="200" y2="102" stroke="#14110E" stroke-width="2"/>
+            <line x1="200" y1="298" x2="200" y2="332" stroke="#14110E" stroke-width="2"/>
+            <line x1="68" y1="200" x2="102" y2="200" stroke="#14110E" stroke-width="2"/>
+            <line x1="298" y1="200" x2="332" y2="200" stroke="#14110E" stroke-width="2"/>
+          </g>
+          <g id="svg-ring-1" class="shield-ring locked" onclick="inspectRing(1)">
+            <circle cx="200" cy="200" r="96" fill="url(#grad-silver)" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="200" cy="200" r="58" fill="#14110E" stroke="#FFFFFF" stroke-width="1.5"/>
+            <circle cx="200" cy="200" r="77" fill="none" stroke="#27221D" stroke-width="6" stroke-dasharray="8 6"/>
+          </g>
+          <g id="svg-ring-0" class="shield-ring active" onclick="inspectRing(0)">
+            <circle cx="200" cy="200" r="56" fill="url(#grad-gold)" stroke="#FFF0A5" stroke-width="2"/>
+            <circle cx="182" cy="186" r="8" fill="#FFF8DC" stroke="#8A6617" stroke-width="1"/>
+            <path d="M 216 178 A 8 8 0 1 0 222 192 A 6 6 0 1 1 216 178 Z" fill="#1E1A16"/>
+            <g fill="#1E1A16"><circle cx="188" cy="215" r="2"/><circle cx="195" cy="218" r="2"/><circle cx="202" cy="216" r="2"/><circle cx="208" cy="212" r="2"/><circle cx="215" cy="213" r="2"/><circle cx="214" cy="221" r="2"/><circle cx="207" cy="221" r="2"/></g>
+          </g>
+        </svg>
+      </div>
+      <div id="ring-pills" class="w-full grid grid-cols-5 gap-1.5 mt-3"></div>
+      <div id="ring-inspector-box" class="w-full mt-4 p-3.5 rounded-xl bg-[#12100E] border border-[#D4AF37]/20 text-xs text-[#B8AFA1] leading-relaxed">
+        <span class="text-[#D4AF37] font-semibold block mb-1">Επιθεώρηση Κύκλου:</span>
+        Κάντε κλικ σε οποιονδήποτε ξεκλειδωμένο κύκλο της ασπίδας για να μελετήσετε τη μεταλλουργική και συμβολική του δομή.
+      </div>
+    </div>
+    <div id="stage-container" class="lg:col-span-7 space-y-6 fade-in"></div>
+  </div>
+
+  <section id="victory-screen" class="hidden max-w-4xl mx-auto relic-card rounded-2xl p-6 sm:p-10 fade-in">
+    <div class="text-center border-b border-[#D4AF37]/25 pb-6 mb-6">
+      <span class="inline-block px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] text-xs font-cinzel tracking-widest uppercase mb-3">Η Σφυρηλάτηση Ολοκληρώθηκε</span>
+      <h2 class="font-cinzel text-2xl sm:text-4xl font-bold text-[#EFECE6] mb-2">Η Ασπίδα του Αχιλλέα Αποκαλύφθηκε</h2>
+      <p class="font-serif-narrative text-sm sm:text-base text-[#B8AFA1] max-w-2xl mx-auto">Αποκρυπτογραφήσατε επιτυχώς και τους πέντε ομόκεντρους κύκλους του Ηφαίστου, ανασυνθέτοντας τον αρχαϊκό κόσμο όπως τον περιέγραψε ο Όμηρος στη ραψωδία Σ της Ιλιάδας.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div class="bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20 text-center"><span class="text-xs text-[#B8AFA1] uppercase tracking-wider block mb-1">Χρόνος Έρευνας</span><span id="stat-time" class="font-cinzel text-xl sm:text-2xl font-bold text-[#D4AF37]">00:00</span></div>
+      <div class="bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20 text-center"><span class="text-xs text-[#B8AFA1] uppercase tracking-wider block mb-1">Χρήση Υποδείξεων</span><span id="stat-hints" class="font-cinzel text-xl sm:text-2xl font-bold text-[#CD7F32]">0</span></div>
+      <div class="bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20 text-center"><span class="text-xs text-[#B8AFA1] uppercase tracking-wider block mb-1">Βαθμίδα Μελετητή</span><span id="stat-rank" class="font-cinzel text-lg sm:text-xl font-bold text-[#EFECE6]">Αρχιτεχνίτης</span></div>
+    </div>
+    <div class="bg-[#12100E]/80 rounded-xl p-5 sm:p-6 border border-[#D4AF37]/20 mb-8 space-y-4">
+      <h3 class="font-cinzel text-lg font-bold text-[#D4AF37]">Αρχαιολογική Σύνοψη των 5 Κύκλων</h3>
+      <div id="victory-summary-list" class="space-y-3 text-sm text-[#EFECE6]/90 font-serif-narrative"></div>
+    </div>
+    <div class="flex flex-wrap items-center justify-center gap-4 no-print">
+      <button onclick="copyCertificateSummary()" class="btn-ghost-gold px-6 py-3 rounded-xl font-medium text-sm flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+        <span id="copy-btn-text">Αντιγραφή Πιστοποιητικού Έρευνας</span>
+      </button>
+      <button onclick="printCertificate()" class="btn-ghost-gold px-6 py-3 rounded-xl font-medium text-sm flex items-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.72 13.829V6.75A2.25 2.25 0 018.97 4.5h6.06a2.25 2.25 0 012.25 2.25v7.079M6.72 13.829H4.5a1.5 1.5 0 00-1.5 1.5v3.75a1.5 1.5 0 001.5 1.5h15a1.5 1.5 0 001.5-1.5v-3.75a1.5 1.5 0 00-1.5-1.5h-2.22M6.72 13.829h10.56M9 9h6m-6 3h6"></path></svg>
+        Εκτύπωση Πιστοποιητικού
+      </button>
+      <button onclick="openLevelSelector()" class="btn-ghost-gold px-6 py-3 rounded-xl font-medium text-sm">Αλλαγή Επιπέδου</button>
+      <button onclick="resetGame()" class="btn-bronze px-6 py-3 rounded-xl font-cinzel font-bold text-sm">Επανάληψη Ίδιου Επιπέδου</button>
+    </div>
+  </section>
+</main>
+
+<div id="codex-drawer" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black/75 backdrop-blur-sm" onclick="toggleCodex()"></div>
+  <aside role="dialog" aria-modal="true" aria-labelledby="codex-title" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-[#191512] border-l border-[#D4AF37]/30 p-6 flex flex-col justify-between overflow-y-auto shadow-2xl">
+    <div>
+      <div class="flex items-center justify-between border-b border-[#D4AF37]/20 pb-4 mb-5">
+        <div>
+          <h3 id="codex-title" class="font-cinzel text-lg font-bold text-[#D4AF37]">Αρχαιολογικό Σημειωματάριο</h3>
+          <p class="text-xs text-[#B8AFA1]">Τεκμήρια Μεταλλουργίας &amp; Ομηρικής Φιλολογίας</p>
+        </div>
+        <button onclick="toggleCodex()" class="p-2 rounded-lg text-[#B8AFA1] hover:text-white bg-[#27221D]" aria-label="Κλείσιμο σημειωματαρίου"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+      </div>
+      <div id="codex-entries" class="space-y-4"></div>
+    </div>
+    <div class="mt-6 pt-4 border-t border-[#D4AF37]/20 text-[11px] text-[#B8AFA1] leading-relaxed">Κάθε όρος επεξηγείται οργανικά βάσει των ομηρικών σχολίων και της αρχαίας χαλκουργικής τεχνικής.</div>
+  </aside>
+</div>
+
+<div id="feedback-toast" class="hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-md w-[92%] px-5 py-4 rounded-xl shadow-2xl border" aria-hidden="true">
+  <div class="flex items-start gap-3">
+    <div id="toast-icon" class="mt-0.5 shrink-0"></div>
+    <div class="text-sm leading-relaxed" id="toast-message"></div>
+  </div>
+</div>
+<div id="sr-announcer" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<footer class="border-t border-[#D4AF37]/15 py-4 text-center text-xs text-[#B8AFA1]/80 bg-[#12100E]">
+  <p>Βασισμένο στην Ιλιάδα του Ομήρου (Σ 478–608, Υ 268–272) • Εκπαιδευτική Εφαρμογή Ιστορικής &amp; Φιλολογικής Τεκμηρίωσης</p>
+</footer>
+
+<script src="js/audio.js"></script>
+<script src="js/state.js"></script>
+<script src="js/curriculum-kids.js"></script>
+<script src="js/curriculum-teens.js"></script>
+<script src="js/curriculum-adults.js"></script>
+<script src="js/puzzles.js"></script>
+<script src="js/renderers.js"></script>
+<script src="js/verify.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,1762 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Το Κρυμμένο Όπλο του Ήφαιστου: Η Αναζήτηση της Ασπίδας του Αχιλλέα</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@300;400;500;600&family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-obsidian: #12100E;
+            --bg-parchment: #1E1A16;
+            --bg-elevated: #27221D;
+            --gold-accent: #D4AF37;
+            --bronze-accent: #CD7F32;
+            --terracotta: #C84B31;
+            --text-ivory: #EFECE6;
+            --text-muted: #A89F91;
+            --border-subtle: rgba(212, 175, 55, 0.25);
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: var(--text-ivory);
+            font-family: 'Inter', sans-serif;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(205, 127, 50, 0.06) 0%, transparent 45%),
+                radial-gradient(circle at 85% 80%, rgba(200, 75, 49, 0.06) 0%, transparent 45%);
+            overflow-x: hidden;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .font-serif-narrative {
+            font-family: 'Noto Serif', serif;
+        }
+
+        /* Archaic Greek Meander Border Pattern */
+        .meander-border {
+            height: 12px;
+            background-image: url("data:image/svg+xml,%3Csvg width='32' height='12' viewBox='0 0 32 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 11h32v1H0v-1zm0-11h32v1H0V0zm4 3h10v6H7V6h4v1H9v1h3V4H5v6h11V3h12v6h-7V6h4v1h-2v1h3V4h-8v6h11' fill='%23D4AF37' fill-opacity='0.35' fill-rule='evenodd'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+        }
+
+        /* Shield Ring Glow & Animations */
+        .shield-ring {
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            cursor: pointer;
+        }
+
+        .shield-ring.locked {
+            opacity: 0.22;
+            filter: grayscale(85%);
+        }
+
+        .shield-ring.active {
+            opacity: 0.9;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+            animation: pulseRing 3s infinite ease-in-out;
+        }
+
+        .shield-ring.unlocked {
+            opacity: 1;
+            filter: drop-shadow(0 0 4px rgba(205, 127, 50, 0.4));
+        }
+
+        @keyframes pulseRing {
+            0%, 100% { filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5)); }
+            50% { filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.95)); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #12100E;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3D352E;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Interactive Cards & Buttons */
+        .relic-card {
+            background: linear-gradient(145deg, #1E1A16 0%, #171411 100%);
+            border: 1px solid var(--border-subtle);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+            transition: border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-bronze {
+            background: linear-gradient(135deg, #8B5A2B 0%, #CD7F32 50%, #A0522D 100%);
+            color: #FFF8EB;
+            border: 1px solid #E5B869;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+            transition: all 0.25s ease;
+        }
+        .btn-bronze:hover:not(:disabled) {
+            filter: brightness(1.12);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4);
+        }
+        .btn-bronze:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        .btn-ghost-gold {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: #E5C76B;
+            transition: all 0.2s ease;
+        }
+        .btn-ghost-gold:hover {
+            background: rgba(212, 175, 55, 0.18);
+            border-color: #D4AF37;
+        }
+
+        /* Astrolabe Rotation */
+        #celestial-wheel {
+            transform-origin: 150px 150px;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Fade transitions */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-[#C84B31] selection:text-white">
+
+    <!-- Top Museum Header -->
+    <header class="border-b border-[#D4AF37]/20 bg-[#161310]/95 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full border border-[#D4AF37] flex items-center justify-center bg-[#27221D] text-[#D4AF37] font-cinzel font-bold text-lg shadow-inner">
+                    Η
+                </div>
+                <div>
+                    <h1 class="font-cinzel text-sm sm:text-base md:text-lg font-bold tracking-wider text-[#EFECE6]">
+                        ΤΟ ΚΡΥΜΜΕΝΟ ΟΠΛΟ ΤΟΥ ΗΦΑΙΣΤΟΥ
+                    </h1>
+                    <p id="header-subtitle" class="text-[11px] sm:text-xs text-[#A89F91] tracking-wide">
+                        Αρχαιολογική &amp; Φιλολογική Αναζήτηση στην Ιλιάδα (Ραψωδία Σ)
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+                <!-- Active Difficulty Badge & Quick Switcher -->
+                <button id="change-level-btn" onclick="openLevelSelector()" class="hidden px-3 py-1.5 rounded-lg bg-[#27221D] border border-[#CD7F32]/50 text-[#E5B869] hover:border-[#D4AF37] text-xs font-medium flex items-center gap-1.5 transition" title="Επιλογή άλλης ηλικιακής βαθμίδας">
+                    <span id="header-level-label">Επίπεδο</span>
+                    <span class="text-[10px] opacity-75">⇄ Αλλαγή Επιπέδου</span>
+                </button>
+
+                <!-- Progress Indicator -->
+                <div class="hidden sm:flex items-center gap-1.5 bg-[#12100E] px-3 py-1.5 rounded-full border border-[#D4AF37]/25">
+                    <span class="text-xs text-[#A89F91]">Ομόκεντροι Κύκλοι:</span>
+                    <span id="header-progress-text" class="text-xs font-semibold text-[#D4AF37]">0 / 5</span>
+                </div>
+
+                <!-- Codex Toggle Button -->
+                <button onclick="toggleCodex()" class="btn-ghost-gold px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium flex items-center gap-2 relative">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    <span>Σημειωματάριο</span>
+                    <span id="codex-badge" class="hidden w-2 h-2 rounded-full bg-[#C84B31] absolute -top-0.5 -right-0.5"></span>
+                </button>
+
+                <!-- Sound Toggle -->
+                <button id="sound-toggle-btn" onclick="toggleAudio()" title="Ήχοι Σφυρηλάτησης" class="p-2 rounded-lg bg-[#27221D] border border-[#D4AF37]/25 text-[#A89F91] hover:text-[#D4AF37] transition">
+                    <svg id="sound-icon-on" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+                    </svg>
+                    <svg id="sound-icon-off" class="w-4 h-4 hidden text-[#C84B31]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15zM17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div class="meander-border w-full"></div>
+    </header>
+
+    <!-- Main Interactive Workspace -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8">
+        
+        <!-- Intro / Prologue Screen with 3 Difficulty Levels -->
+        <section id="intro-screen" class="max-w-5xl mx-auto relic-card rounded-2xl p-6 sm:p-10 text-center fade-in">
+            <div class="inline-block px-3 py-1 rounded-full bg-[#C84B31]/20 border border-[#C84B31]/50 text-[#E88D7A] text-xs font-medium tracking-widest uppercase mb-4">
+                Αρχαιολογική Αποστολή • Τροία, 10ο Έτος του Πολέμου
+            </div>
+            <h2 class="font-cinzel text-2xl sm:text-4xl font-bold text-[#D4AF37] mb-5 leading-tight">
+                Η Αναζήτηση της Ηφαιστότευκτης Ασπίδας
+            </h2>
+            <div class="font-serif-narrative text-sm sm:text-base text-[#EFECE6]/90 leading-relaxed space-y-3 text-left bg-[#12100E]/60 p-5 sm:p-6 rounded-xl border border-[#D4AF37]/15 mb-8">
+                <p>
+                    Μετά τον θάνατο του Πατρόκλου, η πανοπλία του Αχιλλέα έπεσε στα χέρια του Έκτορα. Τη νύχτα εκείνη, η θεά Θέτιδα ανέβηκε στον Όλυμπο και παρακάλεσε τον θεό της μεταλλουργίας, τον Ήφαιστο, να σφυρηλατήσει νέα όπλα για τον γιο της.
+                </p>
+                <p>
+                    Ο θεός έριξε στη φωτιά χαλκό, κασσίτερο, χρυσό και ασήμι, δημιουργώντας μια <strong>πεντάπτυχη</strong> ασπίδα —ένα αμυντικό όπλο φτιαγμένο από πέντε επάλληλα μεταλλικά ελάσματα— πάνω στην οποία αποτύπωσε ολόκληρο το σύμπαν σε πέντε ομόκεντρους κύκλους.
+                </p>
+            </div>
+
+            <div class="mb-4 text-left">
+                <h3 class="font-cinzel text-base sm:text-lg font-bold text-[#D4AF37] text-center mb-1">
+                    Επιλέξτε Επίπεδο Δυσκολίας &amp; Ηλικιακή Βαθμίδα
+                </h3>
+                <p class="text-xs text-[#A89F91] text-center mb-6">
+                    Κάθε επίπεδο προσαρμόζει τους γρίφους, τη γλώσσα και τα ομηρικά τεκμήρια (μπορείτε να αλλάξετε επίπεδο ανά πάσα στιγμή).
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                    <!-- Level 1: 10-13 -->
+                    <div class="bg-[#12100E] border border-[#CD7F32]/40 hover:border-[#D4AF37] rounded-xl p-5 flex flex-col justify-between text-left transition group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <span class="px-2.5 py-0.5 rounded-full bg-[#CD7F32]/20 text-[#E5B869] text-[11px] font-semibold">Ηλικίες 10–13 ετών</span>
+                                <span class="text-xs font-cinzel text-[#A89F91]">Επίπεδο Ι</span>
+                            </div>
+                            <h4 class="font-cinzel text-lg font-bold text-[#EFECE6] group-hover:text-[#D4AF37] transition mb-2">
+                                Μαθητευόμενοι του Ηφαίστου
+                            </h4>
+                            <p class="text-xs text-[#A89F91] leading-relaxed mb-4">
+                                Περιπετειώδης ανακάλυψη με οπτικό εντοπισμό αστερισμών, ξεκάθαρα διλήμματα δικαιοσύνης, αντιστοίχιση των 4 εποχών με τα χρώματα των μετάλλων και συναρμολόγηση της ασπίδας.
+                            </p>
+                        </div>
+                        <button onclick="startGame('kids')" class="w-full btn-bronze py-2.5 px-4 rounded-lg font-cinzel font-bold text-xs sm:text-sm tracking-wide">
+                            Έναρξη (10–13 ετών)
+                        </button>
+                    </div>
+
+                    <!-- Level 2: 14-18 -->
+                    <div class="bg-[#12100E] border border-[#D4AF37]/40 hover:border-[#D4AF37] rounded-xl p-5 flex flex-col justify-between text-left transition group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <span class="px-2.5 py-0.5 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] text-[11px] font-semibold">Ηλικίες 14–18 ετών</span>
+                                <span class="text-xs font-cinzel text-[#A89F91]">Επίπεδο ΙΙ</span>
+                            </div>
+                            <h4 class="font-cinzel text-lg font-bold text-[#EFECE6] group-hover:text-[#D4AF37] transition mb-2">
+                                Ερευνητές του Ομήρου
+                            </h4>
+                            <p class="text-xs text-[#A89F91] leading-relaxed mb-4">
+                                Επαγωγική έρευνα πάνω στα ομηρικά αποσπάσματα: αειφανή άστρα, η δίκη της ποινής στην αγορά, τελετουργικά της σοδειάς, χορογραφία της Κνωσού και 5 μεταλλικές πτύχες.
+                            </p>
+                        </div>
+                        <button onclick="startGame('teens')" class="w-full btn-bronze py-2.5 px-4 rounded-lg font-cinzel font-bold text-xs sm:text-sm tracking-wide">
+                            Έναρξη (14–18 ετών)
+                        </button>
+                    </div>
+
+                    <!-- Level 3: Adults -->
+                    <div class="bg-[#12100E] border border-[#C84B31]/50 hover:border-[#D4AF37] rounded-xl p-5 flex flex-col justify-between text-left transition group">
+                        <div>
+                            <div class="flex items-center justify-between gap-2 mb-2">
+                                <span class="px-2.5 py-0.5 rounded-full bg-[#C84B31]/25 text-[#E88D7A] text-[11px] font-semibold">Ενήλικες &amp; Μελετητές</span>
+                                <span class="text-xs font-cinzel text-[#A89F91]">Επίπεδο ΙΙΙ</span>
+                            </div>
+                            <h4 class="font-cinzel text-lg font-bold text-[#EFECE6] group-hover:text-[#D4AF37] transition mb-2">
+                                Μύστες του Εργαστηρίου
+                            </h4>
+                            <p class="text-xs text-[#A89F91] leading-relaxed mb-4">
+                                Πλήρης φιλολογική και αρχαιομεταλλουργική προσέγγιση: αστρονομικός προσανατολισμός, ανάλυση του αμφίσημου χωρίου της δίκης (Σ 497–508), τεχνική νιέλλο και 5-βηματική χορογραφία.
+                            </p>
+                        </div>
+                        <button onclick="startGame('adults')" class="w-full btn-bronze py-2.5 px-4 rounded-lg font-cinzel font-bold text-xs sm:text-sm tracking-wide">
+                            Έναρξη (Ενήλικες)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Active Game Grid (Hidden initially) -->
+        <div id="game-workspace" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+            
+            <!-- Left Column: Interactive Concentric Shield Diagram (5 cols on lg) -->
+            <div class="lg:col-span-5 relic-card rounded-2xl p-5 sm:p-6 flex flex-col items-center lg:sticky lg:top-24">
+                <div class="w-full flex items-center justify-between mb-3">
+                    <span class="text-xs font-cinzel tracking-widest text-[#D4AF37] uppercase">Διάγραμμα Ασπίδας</span>
+                    <span id="shield-status-label" class="text-xs text-[#A89F91]">Επίπεδο 1 από 5</span>
+                </div>
+
+                <!-- Dynamic SVG Shield -->
+                <div class="relative w-full max-w-[340px] aspect-square my-2 flex items-center justify-center">
+                    <svg id="achilles-shield-svg" viewBox="0 0 400 400" class="w-full h-full drop-shadow-2xl">
+                        <defs>
+                            <radialGradient id="grad-gold" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFF0A5"/>
+                                <stop offset="55%" stop-color="#D4AF37"/>
+                                <stop offset="100%" stop-color="#8A6617"/>
+                            </radialGradient>
+                            <radialGradient id="grad-bronze" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#E6A15C"/>
+                                <stop offset="70%" stop-color="#CD7F32"/>
+                                <stop offset="100%" stop-color="#6E3B10"/>
+                            </radialGradient>
+                            <radialGradient id="grad-silver" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFFFFF"/>
+                                <stop offset="65%" stop-color="#C0C5CE"/>
+                                <stop offset="100%" stop-color="#65737E"/>
+                            </radialGradient>
+                            <radialGradient id="grad-ocean" cx="50%" cy="50%" r="50%">
+                                <stop offset="85%" stop-color="#1E3A5F"/>
+                                <stop offset="95%" stop-color="#2B5876"/>
+                                <stop offset="100%" stop-color="#D4AF37"/>
+                            </radialGradient>
+                        </defs>
+
+                        <!-- Base Dark Backing -->
+                        <circle cx="200" cy="200" r="192" fill="#14110E" stroke="#3D352E" stroke-width="2"/>
+
+                        <!-- RING 5: Outermost Rim - Oceanus (r=190) -->
+                        <g id="svg-ring-4" class="shield-ring locked" onclick="inspectRing(4)">
+                            <circle cx="200" cy="200" r="190" fill="url(#grad-ocean)" stroke="#D4AF37" stroke-width="4"/>
+                            <circle cx="200" cy="200" r="170" fill="#14110E" stroke="#5A8BB0" stroke-width="1.5" stroke-dasharray="6 4"/>
+                            <!-- Wave motifs around Oceanus -->
+                            <text font-size="9" fill="#9CC4E4" font-family="Cinzel" letter-spacing="4">
+                                <textPath href="#ocean-text-path" startOffset="2%">
+                                    ΩΚΕΑΝΟΣ ΠΟΤΑΜΟΣ • ΑΝΤΥΞ • ΑΣΠΙΣ ΑΧΙΛΛΕΩΣ • ΩΚΕΑΝΟΣ ΠΟΤΑΜΟΣ •
+                                </textPath>
+                            </text>
+                            <path id="ocean-text-path" d="M 200, 200 m -177, 0 a 177,177 0 1,1 354,0 a 177,177 0 1,1 -354,0" fill="none"/>
+                        </g>
+
+                        <!-- RING 4: The Dance of Daedalus (r=166) -->
+                        <g id="svg-ring-3" class="shield-ring locked" onclick="inspectRing(3)">
+                            <circle cx="200" cy="200" r="166" fill="#2A1D17" stroke="#C84B31" stroke-width="2"/>
+                            <circle cx="200" cy="200" r="134" fill="#14110E" stroke="#C84B31" stroke-width="1.5"/>
+                            <!-- Choreographic geometric dots -->
+                            <g stroke="#E88D7A" stroke-width="1.5" fill="none">
+                                <circle cx="200" cy="200" r="150" stroke-dasharray="3 9"/>
+                                <circle cx="200" cy="200" r="150" stroke-dasharray="1 11" stroke="#D4AF37" stroke-width="3"/>
+                            </g>
+                        </g>
+
+                        <!-- RING 3: The Seasons & Agriculture (r=132) -->
+                        <g id="svg-ring-2" class="shield-ring locked" onclick="inspectRing(2)">
+                            <circle cx="200" cy="200" r="132" fill="url(#grad-bronze)" stroke="#E5B869" stroke-width="1.5"/>
+                            <circle cx="200" cy="200" r="98" fill="#14110E" stroke="#E5B869" stroke-width="1.5"/>
+                            <!-- 4 Quadrant Dividers for Seasons -->
+                            <line x1="200" y1="68" x2="200" y2="102" stroke="#14110E" stroke-width="2"/>
+                            <line x1="200" y1="298" x2="200" y2="332" stroke="#14110E" stroke-width="2"/>
+                            <line x1="68" y1="200" x2="102" y2="200" stroke="#14110E" stroke-width="2"/>
+                            <line x1="298" y1="200" x2="332" y2="200" stroke="#14110E" stroke-width="2"/>
+                        </g>
+
+                        <!-- RING 2: Two Cities - Peace & War (r=96) -->
+                        <g id="svg-ring-1" class="shield-ring locked" onclick="inspectRing(1)">
+                            <circle cx="200" cy="200" r="96" fill="url(#grad-silver)" stroke="#FFFFFF" stroke-width="1.5"/>
+                            <circle cx="200" cy="200" r="58" fill="#14110E" stroke="#FFFFFF" stroke-width="1.5"/>
+                            <!-- City Wall Battlements Motif -->
+                            <circle cx="200" cy="200" r="77" fill="none" stroke="#27221D" stroke-width="6" stroke-dasharray="8 6"/>
+                        </g>
+
+                        <!-- RING 1: Center Boss - Cosmos & Constellations (r=56) -->
+                        <g id="svg-ring-0" class="shield-ring active" onclick="inspectRing(0)">
+                            <circle cx="200" cy="200" r="56" fill="url(#grad-gold)" stroke="#FFF0A5" stroke-width="2"/>
+                            <!-- Sun, Moon, Stars -->
+                            <circle cx="182" cy="186" r="8" fill="#FFF8DC" stroke="#8A6617" stroke-width="1"/>
+                            <path d="M 216 178 A 8 8 0 1 0 222 192 A 6 6 0 1 1 216 178 Z" fill="#1E1A16"/>
+                            <!-- Ursa Major dots -->
+                            <g fill="#1E1A16">
+                                <circle cx="188" cy="215" r="2"/>
+                                <circle cx="195" cy="218" r="2"/>
+                                <circle cx="202" cy="216" r="2"/>
+                                <circle cx="208" cy="212" r="2"/>
+                                <circle cx="215" cy="213" r="2"/>
+                                <circle cx="214" cy="221" r="2"/>
+                                <circle cx="207" cy="221" r="2"/>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Ring Legend / Quick Selector -->
+                <div id="ring-pills" class="w-full grid grid-cols-5 gap-1.5 mt-3">
+                    <!-- Populated via JS -->
+                </div>
+
+                <!-- Ring Inspection Tooltip Box -->
+                <div id="ring-inspector-box" class="w-full mt-4 p-3.5 rounded-xl bg-[#12100E] border border-[#D4AF37]/20 text-xs text-[#A89F91] leading-relaxed">
+                    <span class="text-[#D4AF37] font-semibold block mb-1">Επιθεώρηση Κύκλου:</span>
+                    Κάντε κλικ σε οποιονδήποτε ξεκλειδωμένο κύκλο της ασπίδας για να μελετήσετε τη μεταλλουργική και συμβολική του δομή.
+                </div>
+            </div>
+
+            <!-- Right Column: Narrative & Analytical Puzzle Stage (7 cols on lg) -->
+            <div id="stage-container" class="lg:col-span-7 space-y-6 fade-in">
+                <!-- Dynamically rendered stage content -->
+            </div>
+
+        </div>
+
+        <!-- Victory / Museum Certificate Screen (Hidden initially) -->
+        <section id="victory-screen" class="hidden max-w-4xl mx-auto relic-card rounded-2xl p-6 sm:p-10 fade-in">
+            <div class="text-center border-b border-[#D4AF37]/25 pb-6 mb-6">
+                <span class="inline-block px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] text-xs font-cinzel tracking-widest uppercase mb-3">
+                    Η Σφυρηλάτηση Ολοκληρώθηκε
+                </span>
+                <h2 class="font-cinzel text-2xl sm:text-4xl font-bold text-[#EFECE6] mb-2">
+                    Η Ασπίδα του Αχιλλέα Αποκαλύφθηκε
+                </h2>
+                <p class="font-serif-narrative text-sm sm:text-base text-[#A89F91] max-w-2xl mx-auto">
+                    Αποκρυπτογραφήσατε επιτυχώς και τους πέντε ομόκεντρους κύκλους του Ηφαίστου, ανασυνθέτοντας τον αρχαϊκό κόσμο όπως τον περιέγραψε ο Όμηρος στη ραψωδία Σ της Ιλιάδας.
+                </p>
+            </div>
+
+            <!-- Archaeological Performance Metrics -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                <div class="bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20 text-center">
+                    <span class="text-xs text-[#A89F91] uppercase tracking-wider block mb-1">Χρόνος Έρευνας</span>
+                    <span id="stat-time" class="font-cinzel text-xl sm:text-2xl font-bold text-[#D4AF37]">00:00</span>
+                </div>
+                <div class="bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20 text-center">
+                    <span class="text-xs text-[#A89F91] uppercase tracking-wider block mb-1">Χρήση Υποδείξεων</span>
+                    <span id="stat-hints" class="font-cinzel text-xl sm:text-2xl font-bold text-[#CD7F32]">0</span>
+                </div>
+                <div class="bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20 text-center">
+                    <span class="text-xs text-[#A89F91] uppercase tracking-wider block mb-1">Βαθμίδα Μελετητή</span>
+                    <span id="stat-rank" class="font-cinzel text-lg sm:text-xl font-bold text-[#EFECE6]">Αρχιτεχνίτης</span>
+                </div>
+            </div>
+
+            <!-- Synthesis Summary -->
+            <div class="bg-[#12100E]/80 rounded-xl p-5 sm:p-6 border border-[#D4AF37]/20 mb-8 space-y-4">
+                <h3 class="font-cinzel text-lg font-bold text-[#D4AF37]">Αρχαιολογική Σύνοψη των 5 Κύκλων</h3>
+                <div id="victory-summary-list" class="space-y-3 text-sm text-[#EFECE6]/90 font-serif-narrative">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <button onclick="copyCertificateSummary()" class="btn-ghost-gold px-6 py-3 rounded-xl font-medium text-sm flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+                    </svg>
+                    <span id="copy-btn-text">Αντιγραφή Πιστοποιητικού Έρευνας</span>
+                </button>
+                <button onclick="openLevelSelector()" class="btn-ghost-gold px-6 py-3 rounded-xl font-medium text-sm">
+                    Αλλαγή Επιπέδου Δυσκολίας
+                </button>
+                <button onclick="resetGame()" class="btn-bronze px-6 py-3 rounded-xl font-cinzel font-bold text-sm">
+                    Επανάληψη Ίδιου Επιπέδου
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Slide-over Archaeological Codex / Journal Drawer -->
+    <div id="codex-drawer" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/75 backdrop-blur-sm" onclick="toggleCodex()"></div>
+        <aside class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-[#191512] border-l border-[#D4AF37]/30 p-6 flex flex-col justify-between overflow-y-auto shadow-2xl">
+            <div>
+                <div class="flex items-center justify-between border-b border-[#D4AF37]/20 pb-4 mb-5">
+                    <div>
+                        <h3 class="font-cinzel text-lg font-bold text-[#D4AF37]">Αρχαιολογικό Σημειωματάριο</h3>
+                        <p class="text-xs text-[#A89F91]">Τεκμήρια Μεταλλουργίας &amp; Ομηρικής Φιλολογίας</p>
+                    </div>
+                    <button onclick="toggleCodex()" class="p-2 rounded-lg text-[#A89F91] hover:text-white bg-[#27221D]">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div id="codex-entries" class="space-y-4">
+                    <!-- Dynamically populated Codex entries -->
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-[#D4AF37]/20 text-[11px] text-[#A89F91] leading-relaxed">
+                Κάθε όρος επεξηγείται οργανικά βάσει των ομηρικών σχολίων και της αρχαίας χαλκουργικής τεχνικής.
+            </div>
+        </aside>
+    </div>
+
+    <!-- Custom Non-Blocking Feedback Toast / Modal -->
+    <div id="feedback-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden max-w-md w-[92%] px-5 py-4 rounded-xl shadow-2xl border transition-all duration-300">
+        <div class="flex items-start gap-3">
+            <div id="toast-icon" class="mt-0.5 shrink-0"></div>
+            <div class="text-sm leading-relaxed" id="toast-message"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#D4AF37]/15 py-4 text-center text-xs text-[#A89F91]/80 bg-[#12100E]">
+        <p>Βασισμένο στην Ιλιάδα του Ομήρου (Σ 478–608) • Εκπαιδευτική Εφαρμογή Ιστορικής &amp; Φιλολογικής Τεκμηρίωσης</p>
+    </footer>
+
+    <script>
+        /* ============================================================================
+           WEB AUDIO SYNTHESIZER (Tactile Bronze Forging & Chime Sound Effects)
+           ============================================================================ */
+        let audioEnabled = true;
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) audioCtx = new AudioContext();
+            }
+        }
+
+        function playTone(type) {
+            if (!audioEnabled) return;
+            try {
+                initAudio();
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                const now = audioCtx.currentTime;
+
+                if (type === 'click') {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(320, now);
+                    osc.frequency.exponentialRampToValueAtTime(140, now + 0.08);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.08);
+                } else if (type === 'error') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(150, now);
+                    osc.frequency.linearRampToValueAtTime(110, now + 0.22);
+                    gain.gain.setValueAtTime(0.08, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                } else if (type === 'unlock') {
+                    // Metallic harmonic bronze chime
+                    const freqs = [440, 659.25, 880];
+                    freqs.forEach((f, idx) => {
+                        const o = audioCtx.createOscillator();
+                        const g = audioCtx.createGain();
+                        o.type = 'sine';
+                        o.frequency.setValueAtTime(f, now + idx * 0.09);
+                        g.gain.setValueAtTime(0.09, now + idx * 0.09);
+                        g.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.09 + 1.1);
+                        o.connect(g);
+                        g.connect(audioCtx.destination);
+                        o.start(now + idx * 0.09);
+                        o.stop(now + idx * 0.09 + 1.1);
+                    });
+                }
+            } catch (e) {
+                // Fail silently if audio blocked by browser policy
+            }
+        }
+
+        function toggleAudio() {
+            audioEnabled = !audioEnabled;
+            document.getElementById('sound-icon-on').classList.toggle('hidden', !audioEnabled);
+            document.getElementById('sound-icon-off').classList.toggle('hidden', audioEnabled);
+            if (audioEnabled) playTone('click');
+        }
+
+        /* ============================================================================
+           GAME DATA & CURRICULUM ACROSS 3 AGE / DIFFICULTY TIERS
+           (Strict adherence to Zero Doubt Rule in every single tier)
+           ============================================================================ */
+        const DIFFICULTY_META = {
+            kids: {
+                id: 'kids',
+                badge: 'Μαθητευόμενοι (10–13)',
+                fullTitle: 'Επίπεδο Ι: Μαθητευόμενοι του Ηφαίστου (10–13 ετών)',
+                rankSuccess: 'Αριστούχος Μαθητευόμενος του Ηφαίστου',
+                rankGood: 'Εξερευνητής της Ομηρικής Ασπίδας'
+            },
+            teens: {
+                id: 'teens',
+                badge: 'Ερευνητές (14–18)',
+                fullTitle: 'Επίπεδο ΙΙ: Ερευνητές του Ομήρου (14–18 ετών)',
+                rankSuccess: 'Διακεκριμένος Ερευνητής του Ομήρου',
+                rankGood: 'Μελετητής της Αρχαίας Μεταλλουργίας'
+            },
+            adults: {
+                id: 'adults',
+                badge: 'Μύστες (Ενήλικες)',
+                fullTitle: 'Επίπεδο ΙΙΙ: Μύστες του Εργαστηρίου (Ενήλικες)',
+                rankSuccess: 'Κορυφαίος Ομηριστής & Μεταλλουργός',
+                rankGood: 'Αρχιτεχνίτης της Ηφαιστότευκτης Ασπίδας'
+            }
+        };
+
+        const CURRICULUM = {
+            /* ------------------------------------------------------------------------
+               TIER 1: KIDS (10-13 YEARS OLD) - Adventurous, visual, intuitive
+               ------------------------------------------------------------------------ */
+            kids: [
+                {
+                    id: 0,
+                    shortTitle: "Α' Κύκλος",
+                    title: "Κύκλος Α': Ο Ουρανός & Το Άστρο που δεν Βουτά στη Θάλασσα",
+                    subtitle: "Το Κέντρο της Ασπίδας (Ιλιάδα Σ 483–489)",
+                    metal: "Λαμπερός Χρυσός & Βαθύ Μπλε Σμάλτο",
+                    excerpt: "«Στο κέντρο της ασπίδας ο Ήφαιστος έφτιαξε τη γη, τον ουρανό, τη θάλασσα, τον ήλιο και το γεμάτο φεγγάρι. Έβαλε τις Πλειάδες —ένα σμήνος από επτά φωτεινά αστέρια—, τις Υάδες, τον κυνηγό Ωρίωνα και την Άρκτο, που οι ναυτικοί την αποκαλούν και Άμαξα, γιατί μοιάζει με άρμα και είναι η μόνη που δεν βουτά ποτέ στα νερά του Ωκεανού.»",
+                    contextNote: "Οι αρχαίοι Έλληνες πίστευαν πως γύρω από όλη τη γη έρεε ένας κυκλικός ποταμός, ο Ωκεανός, όπου βυθίζονταν τα αστέρια όταν έδυαν. Όμως ένας συγκεκριμένος βόρειος αστερισμός μένει πάντα ψηλά στον νυχτερινό ουρανό της Ελλάδας και καθοδηγεί τους ναυτικούς χωρίς να «βρέχεται» ποτέ στον ορίζοντα.",
+                    puzzleInstruction: "1. Πατήστε τα βέλη για να γυρίσετε τον αστρολάβο στις 0° (Βορράς), ώστε η Άμαξα να ευθυγραμμιστεί. 2. Επιλέξτε ποιος αστερισμός μένει πάντα στον ουρανό χωρίς να βουτά στον Ωκεανό:",
+                    hints: [
+                        "Διαβάστε ξανά το κείμενο: ποιος αστερισμός έχει και δεύτερο όνομα που θυμίζει τροχοφόρο όχημα;",
+                        "Ο αστερισμός αυτός λέγεται Άρκτος ή «Άμαξα» και βρίσκεται ακριβώς στο κέντρο του αστρολάβου.",
+                        "Γυρίστε τον αστρολάβο στις 0° και πατήστε την επιλογή «Η Άρκτος / Άμαξα»."
+                    ],
+                    codexEntry: {
+                        title: "Η Άμαξα (Μεγάλη Άρκτος) & Ο Ωκεανός",
+                        body: "Η Μεγάλη Άρκτος ονομαζόταν «Άμαξα» επειδή τα επτά πιο φωτεινά αστέρια της σχηματίζουν ένα άρμα. Επειδή βρίσκεται κοντά στον βόρειο πόλο, δεν δύει ποτέ στον ελληνικό ουρανό."
+                    },
+                    loreSummary: "Στο κέντρο της ασπίδας λάμπουν ο Ήλιος, η Σελήνη και η Άμαξα (Μεγάλη Άρκτος), ο αστερισμός που οδηγεί τους ταξιδιώτες."
+                },
+                {
+                    id: 1,
+                    shortTitle: "Β' Κύκλος",
+                    title: "Κύκλος Β': Οι Δύο Πόλεις & Τα Δύο Τάλαντα Χρυσού",
+                    subtitle: "Ειρήνη και Δικαιοσύνη στην Αγορά (Ιλιάδα Σ 490–508)",
+                    metal: "Λαμπερό Ασήμι & Χρυσός",
+                    excerpt: "«Στην πρώτη πόλη γίνονταν γάμοι και γιορτές, μα στην αγορά είχε μαζευτεί πλήθος κόσμου. Δύο άνδρες μάλωναν για την ποινή —δηλαδή τη χρηματική αποζημίωση— ενός σκοτωμένου ανθρώπου. Στη μέση της πλατείας υπήρχαν δύο τάλαντα χρυσού —δύο βαριά χρυσά νομίσματα— για να τα κερδίσει εκείνος ο σοφός γέροντας που θα έβρισκε την πιο δίκαιη λύση.»",
+                    contextNote: "Αντί να λύσουν τη διαφορά τους με σπαθιά, οι πολίτες της ειρηνικής πόλης ζήτησαν τη βοήθεια των «γερόντων» —των πιο έμπειρων και σεβαστών συμβούλων της πόλης. Το χρυσάφι στη μέση ήταν η αμοιβή για τη σοφότερη και πιο ειρηνική δικαστική απόφαση.",
+                    puzzleInstruction: "Παρατηρήστε τη σκηνή στην αγορά και επιλέξτε ποιος είναι ο πραγματικός σκοπός των δύο ταλάντων χρυσού που βρίσκονται στη μέση των γερόντων:",
+                    hints: [
+                        "Στην ειρηνική πόλη, στόχος των δικαστών δεν είναι ο πόλεμος, αλλά η δίκαιη συμφιλίωση.",
+                        "Ο Όμηρος γράφει καθαρά πως ο χρυσός θα δοθεί σε όποιον «πρόφερε την πιο δίκαιη απόφαση».",
+                        "Επιλέξτε την απάντηση που αναφέρει ότι τα δύο τάλαντα αποτελούν έπαθλο δικαιοσύνης για τον πιο δίκαιο δικαστή."
+                    ],
+                    codexEntry: {
+                        title: "Τάλαντα Χρυσού & Ποινή",
+                        body: "Το «τάλαντον» ήταν μονάδα βάρους για πολύτιμα μέταλλα. Η «ποινή» ήταν η αποζημίωση που πλήρωνε κάποιος για να αποκαταστήσει μια αδικία χωρίς να ξεσπάσει πόλεμος ανάμεσα στις οικογένειες."
+                    },
+                    loreSummary: "Η ειρηνική πόλη δείχνει πως οι διαφορές λύνονται με δίκαιους νόμους και σοφούς δικαστές, όχι με βία."
+                },
+                {
+                    id: 2,
+                    shortTitle: "Γ' Κύκλος",
+                    title: "Κύκλος Γ': Οι Τέσσερις Εποχές & Τα Χρώματα των Μετάλλων",
+                    subtitle: "Η Μαγεία της Μεταλλουργίας του Ηφαίστου (Ιλιάδα Σ 541–589)",
+                    metal: "Χρυσός, Κασσίτερος, Χαλκός & Κύανος",
+                    excerpt: "«Ο Ήφαιστος έφτιαξε ένα χωράφι από χρυσό που μαύριζε καθώς το όργωναν, κι ένας άνδρας έδινε στους γεωργούς ένα κύπελλον —ένα δίωτο ποτήρι— με γλυκό κρασί. Αλλού θεριστές έκοβαν τα χρυσά στάχυα, στο αμπέλι ένα αγόρι τραγουδούσε τον Λίνο —ένα γλυκόπικρο παραδοσιακό τραγούδι του τρύγου— δίπλα σε φράχτη από λευκό κασσίτερο, ενώ στο λιβάδι έβοσκαν βόδια από χρυσό και κασσίτερο.»",
+                    contextNote: "Ο θεός Ήφαιστος ήταν τόσο σπουδαίος τεχνίτης ώστε έδινε διαφορετικά χρώματα στα μέταλλα: χρυσό για τα ώριμα στάχυα, σκούρο οξειδωμένο χρυσό για το φρεσκοοργωμένο χώμα, λευκό κασσίτερο (καλάι) για τον φράχτη του αμπελιού και δίχρωμα μέταλλα για τα ζώα.",
+                    puzzleInstruction: "Ταιριάξτε καθεμία από τις 4 εποχές της ασπίδας με το σωστό μεταλλικό χρώμα ή έθιμο που έφτιαξε ο Ήφαιστος:",
+                    hints: [
+                        "Στο όργωμα (Άνοιξη), το χρυσό χώμα «μαύριζε» και οι εργάτες έπιναν κρασί από το κύπελλον.",
+                        "Στον τρύγο (Φθινόπωρο), ακούγεται το τραγούδι του Λίνου δίπλα στον λευκό φράχτη από κασσίτερο.",
+                        "Επιλέξτε: 1→Β (Όργωμα: Μαύρο χρυσό χώμα & κύπελλο), 2→Δ (Θερισμός: Χρυσά στάχυα & βασιλιάς), 3→Α (Τρύγος: Λευκός κασσίτερος & Λίνος), 4→Γ (Βοσκή: Δίχρωμα βόδια)."
+                    ],
+                    codexEntry: {
+                        title: "Κασσίτερος & Κύπελλον",
+                        body: "Ο «κασσίτερος» είναι ένα ασημόλευκο μέταλλο που αναμειγνύεται με τον χαλκό για να φτιαχτεί ο μπρούντζος. Το «κύπελλον» ήταν το αρχαίο ποτήρι φιλοξενίας."
+                    },
+                    loreSummary: "Οι τέσσερις εποχές του χρόνου ζωντανεύουν με διαφορετικά μέταλλα, δείχνοντας την αξία της εργασίας και της φύσης."
+                },
+                {
+                    id: 3,
+                    shortTitle: "Δ' Κύκλος",
+                    title: "Κύκλος Δ': Ο Κυκλικός Χορός της Κνωσού",
+                    subtitle: "Η Γιορτή της Νεότητας (Ιλιάδα Σ 590–606)",
+                    metal: "Χρυσός & Ασήμι",
+                    excerpt: "«Πάνω στην ασπίδα ο Ήφαιστος σμίλεψε έναν χορό όμοιο με εκείνον που έφτιαξε στην Κνωσό της Κρήτης ο Δαίδαλος για την Αριάδνη. Αγόρια με χρυσά μαχαίρια σε ασημένιους τελαμώνες —δηλαδή λουριά περασμένα στον ώμο— και κορίτσια με λεπτές λινές οθόνες —αέρινα γυαλιστερά φορέματα— χόρευαν πιασμένα από τον καρπό, πρώτα σε κύκλο και έπειτα σε δύο αντικριστές σειρές, με δύο ακροβάτες να κάνουν τούμπες στο κέντρο.»",
+                    contextNote: "Στην αρχαία Κρήτη και στην Ελλάδα οι χορευτές πιάνονταν από τον καρπό του χεριού για να μη σπάει ο κύκλος όταν έτρεχαν γρήγορα, σαν τον τροχό του αγγειοπλάστη.",
+                    puzzleInstruction: "Βάλτε τα 3 στάδια του χορού στη σωστή σειρά, όπως τα περιέγραψε ο Όμηρος (από το 1 έως το 3):",
+                    hints: [
+                        "Πρώτα ο ποιητής αναφέρει τον δημιουργό του χορού στην Κνωσό (τον Δαίδαλο) και το πιάσιμο των χεριών.",
+                        "Έπειτα οι χορευτές στριφογυρίζουν γρήγορα σε κύκλο και στο τέλος χωρίζονται σε σειρές με ακροβάτες.",
+                        "Σωστή σειρά: 1. Χορός του Δαιδάλου & πιάσιμο από τον καρπό → 2. Γρήγορος κύκλος σαν τροχός → 3. Αντικριστές σειρές με ακροβάτες."
+                    ],
+                    codexEntry: {
+                        title: "Τελαμών & Λινές Οθόνες",
+                        body: "Ο «τελαμών» ήταν ο στολισμένος ιμάντας ώμου των αρχαίων πολεμιστών και χορευτών, ενώ οι «οθόνες» ήταν πανάλαφρα λινά υφάσματα."
+                    },
+                    loreSummary: "Ο χορός της Κνωσού αποτυπώνει τη χαρά, τη μουσική και τη ζωντάνια της νεότητας."
+                },
+                {
+                    id: 4,
+                    shortTitle: "Ε' Κύκλος",
+                    title: "Κύκλος Ε': Η Ασπίδα Κλείνει — Μέταλλα & Ωκεανός",
+                    subtitle: "Η Εξωτερική Στεφάνη & Η Αντοχή του Όπλου (Ιλιάδα Σ 607–608)",
+                    metal: "Χαλκός, Χρυσός & Κασσίτερος",
+                    excerpt: "«Γύρω-γύρω στην εξωτερική άντυγα —τη μεταλλική στεφάνη που έκλεινε την ασπίδα— ο Ήφαιστος έβαλε τα κύματα του μεγάλου ποταμού Ωκεανού. Έτσι η ασπίδα είχε 5 γερά μεταλλικά φύλλα, τις πτύχες (δύο χαλκού απέξω, ένα χρυσού στη μέση και δύο κασσιτέρου από μέσα), ώστε κανένα εχθρικό δόρυ να μην μπορεί να τη διαπεράσει.»",
+                    contextNote: "Η «άντυξ» (το χείλος της ασπίδας) κρατούσε ενωμένα όλα τα ελάσματα και συμβόλιζε τον Ποταμό Ωκεανό που αγκάλιαζε ολόκληρη τη Γη.",
+                    puzzleInstruction: "Ολοκληρώστε την κατασκευή της ασπίδας! Επιλέξτε τα 3 βασικά μέταλλα που χρησιμοποίησε ο Ήφαιστος για τις πτύχες της και ποιο ποτάμι έβαλε στην εξωτερική άντυγα:",
+                    hints: [
+                        "Στο κείμενο αναφέρονται τρία μέταλλα: χαλκός, χρυσός και κασσίτερος.",
+                        "Στην εξωτερική στεφάνη (άντυγα) ρέει ο μεγάλος Ποταμός Ωκεανός.",
+                        "Επιλέξτε Χαλκό, Χρυσό, Κασσίτερο και «Τον Ποταμό Ωκεανό»."
+                    ],
+                    codexEntry: {
+                        title: "Άντυξ & Πτύχες",
+                        body: "«Άντυξ» ονομάζεται το κυκλικό πλαίσιο στην άκρη της ασπίδας, ενώ «πτύχες» είναι τα επάλληλα μεταλλικά φύλλα που την κάνουν άτρωτη."
+                    },
+                    loreSummary: "Με τον Ποταμό Ωκεανό στην άντυγα και πέντε μεταλλικές πτύχες, η ασπίδα του Αχιλλέα είναι έτοιμη!"
+                }
+            ],
+
+            /* ------------------------------------------------------------------------
+               TIER 2: TEENS (14-18 YEARS OLD) - Investigative, deductive, balanced
+               ------------------------------------------------------------------------ */
+            teens: [
+                {
+                    id: 0,
+                    shortTitle: "Α' Κύκλος",
+                    title: "Κύκλος Α': Ουράνιος Προσανατολισμός & Τα Αειφανή Άστρα",
+                    subtitle: "Ο Κεντρικός Ομφαλός της Ασπίδας (Ιλιάδα Σ 483–489)",
+                    metal: "Χρυσός & Κύανος (Σκούρο Γαλάζιο Σμάλτο)",
+                    excerpt: "«Πάνω της έφτιαξε τη γη, τον ουρανό, τη θάλασσα, τον ακούραστο ήλιο και το γεμάτο φεγγάρι. Έφτιαξε κι όλα τα άστρα που στεφανώνουν τον ουρανό: τις Πλειάδες, τις Υάδες, τη δύναμη του Ορίωνα και την Άρκτο —που την αποκαλούν και Άμαξα— η οποία στρέφεται γύρω από τον εαυτό της, παραμονεύει τον Ορίωνα και μόνη αυτή δεν συμμετέχει στα λουτρά του Ωκεανού.»",
+                    contextNote: "Στην αρχαία αστρονομία, «αειφανή» ονομάζονται τα άστρα που, λόγω του γεωγραφικού πλάτους της Ελλάδας, δεν δύουν ποτέ κάτω από τον ορίζοντα. Επειδή ο Όμηρος φανταζόταν τον Ωκεανό ως κυκλικό ποταμό που περιέβαλλε τη γη, έλεγε πως η Μεγάλη Άρκτος δεν «λούζεται» ποτέ στα νερά του, σε αντίθεση με τον Ορίωνα και τις Πλειάδες που δύουν.",
+                    puzzleInstruction: "Περιστρέψτε τον αστρολάβο στις 0° (Βορράς) ώστε ο Ορίων να βρεθεί απέναντι από τον πόλο, και επιλέξτε τον αειφανή αστερισμό που «παραμονεύει τον Ορίωνα»:",
+                    hints: [
+                        "Προσέξτε την περιγραφή: ο αστερισμός αυτός «στρέφεται γύρω από τον εαυτό της» (κοντά στον βόρειο πόλο) και δεν δύει ποτέ.",
+                        "Ο Όμηρος αναφέρει πως φέρει και τη λαϊκή ονομασία «Άμαξα».",
+                        "Ευθυγραμμίστε τον αστρολάβο στις 0° και επιλέξτε «Η Άρκτος / Άμαξα»."
+                    ],
+                    codexEntry: {
+                        title: "Αειφανή Άστρα & Κύανος",
+                        body: "Τα «αειφανή» άστρα (όπως η Μεγάλη Άρκτος/Άμαξα) παραμένουν ορατά όλη τη νύχτα στον βόρειο ουρανό. Ο «κύανος» ήταν σκούρο μπλε σμάλτο με το οποίο ο Ήφαιστος απέδωσε τον ουρανό."
+                    },
+                    loreSummary: "Ο ομφαλός αποτυπώνει τη Γη, τον Ουρανό, τη Θάλασσα και τον αειφανή αστερισμό της Μεγάλης Άρκτου (Άμαξας)."
+                },
+                {
+                    id: 1,
+                    shortTitle: "Β' Κύκλος",
+                    title: "Κύκλος Β': Η Δίκη των Δύο Ταλάντων στην Αγορά",
+                    subtitle: "Από την Ιδιωτική Εκδίκηση στη Δημόσια Δικαιοσύνη (Ιλιάδα Σ 490–508)",
+                    metal: "Άργυρος & Χρυσός",
+                    excerpt: "«Στην αγορά της ειρηνικής πόλης είχε μαζευτεί πλήθος κόσμου· εκεί είχε ξεσπάσει διαμάχη ανάμεσα σε δύο άνδρες για την ποινή —τη χρηματική αποζημίωση— ενός σκοτωμένου ανθρώπου. Ο ένας δήλωνε στον λαό πως τα είχε πληρώσει όλα, ενώ ο άλλος αρνιόταν πως έλαβε τίποτα. Στη μέση κείτονταν δύο τάλαντα χρυσού —δύο ζυγισμένα πολύτιμα βάρη— για να δοθούν σε εκείνον τον γέροντα δικαστή που θα πρόφερε την πιο δίκαιη απόφαση.»",
+                    contextNote: "Η σκηνή αυτή είναι η αρχαιότερη περιγραφή δίκης στην ευρωπαϊκή λογοτεχνία. Αντί οι συγγενείς του νεκρού να πάρουν τον νόμο στα χέρια τους (αυτοδικία), καταφεύγουν στους «γέροντες» (τους δικαστές της κοινότητας) παρουσία μαρτύρων και του λαού.",
+                    puzzleInstruction: "Αναλύστε τις 3 προτάσεις των γερόντων-δικαστών και επιλέξτε εκείνη που εξασφαλίζει την ειρήνη της πόλης βάσει αποδείξεων και μαρτύρων:",
+                    hints: [
+                        "Η ειρηνική πόλη απορρίπτει τόσο τη μονομαχία όσο και την τιμωρία χωρίς αποδείξεις.",
+                        "Η δίκαιη κρίση απαιτεί εξέταση των μαρτύρων παρουσία του λαού στην αγορά.",
+                        "Επιλέξτε τον Γέροντα Γ' (Αλκίνοο), που ζητά την προσκόμιση μαρτύρων για την καταβολή της ποινής."
+                    ],
+                    codexEntry: {
+                        title: "Ποινή & Διαιτησία στην Αγορά",
+                        body: "Στο ομηρικό δίκαιο, η «ποινή» ήταν η υλική αποζημίωση αίματος. Η δημόσια επίλυση της διαφοράς από τους γέροντες σηματοδοτεί τη γέννηση του κράτους δικαίου."
+                    },
+                    loreSummary: "Η σύγκριση της ειρηνικής πόλης (όπου κυριαρχεί η δίκη και η λογική) με την πολιορκημένη πόλη αναδεικνύει την αξία των θεσμών."
+                },
+                {
+                    id: 2,
+                    shortTitle: "Γ' Κύκλος",
+                    title: "Κύκλος Γ': Ο Κύκλος της Γης & Η Πολυχρωμία των Μετάλλων",
+                    subtitle: "Αγροτικός Μόχθος & Μεταλλουργική Τέχνη (Ιλιάδα Σ 541–589)",
+                    metal: "Χρυσός, Κασσίτερος, Χαλκός & Κύανος",
+                    excerpt: "«Πάνω της έβαλε ένα βαθύ χωράφι που μαύριζε καθώς το όργωναν, αν και ήταν φτιαγμένο από χρυσάφι· και στην άκρη του αυλακιού ένας άνδρας έδινε στους οργωτές ένα κύπελλον —δίωτο ποτήρι— με γλυκό κρασί. Στον θερισμό ο βασιλιάς στεκόταν σιωπηλός κρατώντας το σκήπτρο —τη ράβδο εξουσίας—, στον τρύγο ένα αγόρι έπαιζε φόρμιγγα και τραγουδούσε τον Λίνο —έναν αρχαίο ύμνο συγκομιδής— δίπλα σε φράχτη κασσιτέρου, ενώ στο λιβάδι βόδια από χρυσό και κασσίτερο δέχονταν επίθεση από λιοντάρια.»",
+                    contextNote: "Ο Όμηρος περιγράφει την τεχνική της πολυχρωμίας στα μέταλλα: ο Ήφαιστος συνδυάζει χρυσό, ασημόλευκο κασσίτερο (καλάι) και σκούρο χαλκό/κύανο ώστε κάθε εποχή του έτους να ξεχωρίζει οπτικά.",
+                    puzzleInstruction: "Αντιστοιχίστε καθεμία από τις 4 αγροτικές σκηνές με το ακριβές ομηρικό έθιμο ή μεταλλουργικό χαρακτηριστικό της:",
+                    hints: [
+                        "Το όργωμα συνδέεται με το χρυσό χώμα που μαυρίζει και το κύπελλον του κρασιού.",
+                        "Ο τρύγος συνοδεύεται από το τραγούδι του Λίνου και τον φράχτη από κασσίτερο.",
+                        "Επιλέξτε: 1→Β, 2→Δ, 3→Α, 4→Γ."
+                    ],
+                    codexEntry: {
+                        title: "Ο Λίνος & Η Πολυχρωμία του Ηφαίστου",
+                        body: "Ο «Λίνος» ήταν αρχέγονο παραδοσιακό τραγούδι που συνόδευε τον τρύγο, εκφράζοντας τόσο τη χαρά της συγκομιδής όσο και τη μελαγχολία για το τέλος του καλοκαιριού."
+                    },
+                    loreSummary: "Οι τέσσερις εποχές συνδέουν τον κύκλο της φύσης με τη δεξιοτεχνία των κραμάτων χρυσού και κασσιτέρου."
+                },
+                {
+                    id: 3,
+                    shortTitle: "Δ' Κύκλος",
+                    title: "Κύκλος Δ': Η Χορογραφία του Δαιδάλου & Ο Τροχός του Κεραμέα",
+                    subtitle: "Κίνηση, Ενδυμασία & Ρυθμός στην Κνωσό (Ιλιάδα Σ 590–606)",
+                    metal: "Χρυσός, Άργυρος & Χαλκός",
+                    excerpt: "«Ο θεός φιλοτέχνησε έναν χορό όμοιο με εκείνον που έφτιαξε στην Κνωσό ο Δαίδαλος για την Αριάδνη. Νέοι με χρυσές μάχαιρες σε ασημένιους τελαμώνες —ιμάντες ώμου— και παρθένες με λεπτές λινές οθόνες —γυαλιστερά υφάσματα— πιάνονταν από τον καρπό. Άλλοτε έτρεχαν σε κύκλο ανάλαφρα, όπως ο τροχός του κεραμέα —του αγγειοπλάστη— που δοκιμάζει αν γυρίζει ομαλά, κι άλλοτε έτρεχαν σε αντικριστές σειρές με δύο κυβιστητήρες —ακροβάτες— στο κέντρο.»",
+                    contextNote: "Η παρομοίωση με τον «τροχό του κεραμέως» δείχνει την απόλυτη γεωμετρική συμμετρία και ταχύτητα του αρχαίου κυκλικού χορού.",
+                    puzzleInstruction: "Τοποθετήστε τα 4 στάδια της χορογραφίας στη σωστή χρονική και περιγραφική σειρά (1 έως 4):",
+                    hints: [
+                        "Ξεκινήστε από την αναφορά στον μυθικό δημιουργό του χορού στην Κνωσό (Δαίδαλος).",
+                        "Ακολουθεί η περιγραφή των ρούχων (οθόνες, τελαμώνες) και της λαβής από τον καρπό.",
+                        "Σωστή σειρά: 1. Δαίδαλος στην Κνωσό → 2. Λαβή από τον καρπό & ενδυμασία → 3. Κυκλική περιστροφή σαν τροχός κεραμέα → 4. Αντικριστές σειρές με ακροβάτες."
+                    ],
+                    codexEntry: {
+                        title: "Τροχός Κεραμέως & Κυβιστητήρες",
+                        body: "Ο «τροχός του κεραμέως» είναι ο περιστρεφόμενος δίσκος του αγγειοπλάστη. Οι «κυβιστητήρες» ήταν επαγγελματίες ακροβάτες που έδιναν ρυθμό στο κέντρο του κύκλου."
+                    },
+                    loreSummary: "Ο κυκλικός χορός της Κνωσού συνδυάζει τη μινωική παράδοση με την αθλητική χάρη της αρχαϊκής εποχής."
+                },
+                {
+                    id: 4,
+                    shortTitle: "Ε' Κύκλος",
+                    title: "Κύκλος Ε': Η Στρωματογραφία των 5 Πτυχών & Ο Ωκεανός",
+                    subtitle: "Η Θωράκιση της Ασπίδας (Ιλιάδα Σ 607–608 & Υ 268–272)",
+                    metal: "2 Χαλκού, 2 Κασσιτέρου & 1 Χρυσού",
+                    excerpt: "«Γύρω-γύρω στην εξωτερική άντυγα —την ενισχυμένη στεφάνη της ασπίδας— έβαλε τη μεγάλη δύναμη του ποταμού Ωκεανού. Κι όταν το δόρυ του Αινεία χτύπησε την ασπίδα, διαπέρασε τις δύο εξωτερικές πτύχες —μεταλλικά φύλλα— χαλκού, μα σταμάτησε στη χρυσή πτυχή που βρισκόταν στη μέση, πριν φτάσει στις δύο εσωτερικές πτύχες κασσιτέρου.»",
+                    contextNote: "Ο Ήφαιστος τοποθέτησε τα 5 ελάσματα συμμετρικά: σκληρός χαλκός εξωτερικά, εύπλαστος χρυσός στον πυρήνα για να απορροφά την κρούση, και κασσίτερος εσωτερικά.",
+                    puzzleInstruction: "Ρυθμίστε τη σωστή σειρά των 5 μεταλλικών πτυχών (από έξω προς τα μέσα) και επιλέξτε ποιο στοιχείο σφραγίζει την εξωτερική άντυγα:",
+                    hints: [
+                        "Οι 2 πρώτες πτύχες (εξωτερικά) είναι από χαλκό.",
+                        "Η 3η πτυχή (στη μέση) είναι από χρυσό, ενώ οι 2 εσωτερικές (4η και 5η) είναι από κασσίτερο.",
+                        "Σειρά: Χαλκός, Χαλκός, Χρυσός, Κασσίτερος, Κασσίτερος — και στην άντυγα «Τον Ποταμό Ωκεανό»."
+                    ],
+                    codexEntry: {
+                        title: "Πεντάπτυχη Κατασκευή & Άντυξ",
+                        body: "Η συμμετρική διάταξη 2 Χαλκού – 1 Χρυσού – 2 Κασσιτέρου εξηγεί γιατί το δόρυ του Αινεία δεν μπόρεσε να διαπεράσει την ασπίδα του Αχιλλέα."
+                    },
+                    loreSummary: "Η πεντάπτυχη θωράκιση και ο Ποταμός Ωκεανός στην άντυγα ολοκληρώνουν το αριστούργημα του Ηφαίστου."
+                }
+            ],
+
+            /* ------------------------------------------------------------------------
+               TIER 3: ADULTS (FULL PHILOLOGICAL & ARCHAEOMETALLURGICAL DEPTH)
+               ------------------------------------------------------------------------ */
+            adults: [
+                {
+                    id: 0,
+                    shortTitle: "Α' Κύκλος",
+                    title: "Κύκλος Α': Ο Κόσμος & Τα Ουράνια Σημεία",
+                    subtitle: "Ο Κεντρικός Ομφαλός της Ασπίδας (Ιλιάδα Σ 483–489)",
+                    metal: "Χρυσός & Κύανος (Σκούρο Γαλάζιο Σμάλτο)",
+                    excerpt: "«Πάνω της έφτιαξε τη γη, τον ουρανό, τη θάλασσα, τον ακούραστο ήλιο και το γεμάτο φεγγάρι. Έφτιαξε κι όλα τα άστρα που στεφανώνουν τον ουρανό: τις Πλειάδες, τις Υάδες, τη δύναμη του Ορίωνα και την Άρκτο —που την αποκαλούν και Άμαξα— η οποία στρέφεται γύρω από τον εαυτό της, παραμονεύει τον Ορίωνα και μόνη αυτή δεν συμμετέχει στα λουτρά του Ωκεανού.»",
+                    contextNote: "Στην ομηρική κοσμολογία, ο Ωκεανός θεωρούνταν ένας γιγάντιος ποταμός που περιέβαλλε κυκλικά όλη την επίπεδη γη, εκεί όπου πίστευαν πως βυθίζονταν τα άστρα όταν έδυαν. Οι αρχαίοι Έλληνες ναυτικοί παρατηρούσαν πως ένας συγκεκριμένος αστερισμός του βόρειου ημισφαιρίου είναι αειφανής —δηλαδή δεν κατεβαίνει ποτέ κάτω από τον ορίζοντα ώστε να «λουστεί» στα νερά του Ωκεανού.",
+                    puzzleInstruction: "Περιστρέψτε τον ουράνιο αστρολάβο του Ηφαίστου ώστε να ευθυγραμμίσετε τους αστερισμούς με την ομηρική περιγραφή, και κατόπιν επιλέξτε τον αστερισμό που παραμένει αειφανής χωρίς να αγγίζει ποτέ την εξωτερική στεφάνη του Ωκεανού.",
+                    hints: [
+                        "Παρατηρήστε προσεκτικά ποιος αστερισμός φέρει και δεύτερη ονομασία («Άμαξα») μέσα στο ομηρικό απόσπασμα.",
+                        "Ο αστερισμός αυτός «στρέφεται γύρω από τον εαυτό της» (περιστρέφεται γύρω από τον βόρειο ουράνιο πόλο) και «παραμονεύει» τον κυνηγό Ορίωνα.",
+                        "Στρέψτε τον αστρολάβο στη θέση 'Βορράς (0°)' και επιλέξτε τη Μεγάλη Άρκτο (Άμαξα), η οποία στον ελλαδικό χώρο δεν δύει ποτέ."
+                    ],
+                    codexEntry: {
+                        title: "Κύανος & Ουράνια Ναυσιπλοΐα",
+                        body: "Ο «κύανος» ήταν μια σκούρα γαλάζια υαλώδης πάστα (σμάλτο) ή χαλκός με προσμίξεις που έδινε βαθύ μπλε χρώμα, ιδανικό για να αποδώσει ο Ήφαιστος τον νυχτερινό ουρανό και τη θάλασσα. Η Μεγάλη Άρκτος (Άμαξα) αποτελούσε τον βασικό πυξιδικό οδηγό των Αχαιών ναυτικών."
+                    },
+                    loreSummary: "Ο κεντρικός ομφαλός αποτυπώνει τη Γη, τον Ουρανό, τη Θάλασσα και τον αειφανή αστερισμό της Μεγάλης Άρκτου, θεμελιώνοντας την κοσμική τάξη."
+                },
+                {
+                    id: 1,
+                    shortTitle: "Β' Κύκλος",
+                    title: "Κύκλος Β': Οι Δύο Πόλεις — Η Δίκη των Δύο Ταλάντων",
+                    subtitle: "Το Αμφίσημο Χωρίο της Δίκης (Ιλιάδα Σ 497–508)",
+                    metal: "Άργυρος (Ασήμι) & Χρυσός",
+                    excerpt: "«Στην αγορά της ειρηνικής πόλης είχε μαζευτεί πλήθος κόσμου· εκεί είχε ξεσπάσει φιλονικία ανάμεσα σε δύο άνδρες για την ποινή ενός σκοτωμένου ανθρώπου —δηλαδή για τη χρηματική αποζημίωση που όφειλε να πληρώσει ο φονιάς στους συγγενείς του νεκρού. Ο ένας διαβεβαίωνε τον λαό πως τα είχε πληρώσει όλα («εύχετο πάντ’ αποδούναι»), ενώ ο άλλος αρνιόταν πως πήρε τίποτα («αναίνετο μηδέν ελέσθαι»). Στη μέση κείτονταν δύο τάλαντα χρυσού —δύο πολύτιμα ζυγισμένα νομισματικά βάρη— για να δοθούν σε εκείνον τον γέροντα δικαστή που θα πρόφερε την πιο δίκαιη απόφαση.»",
+                    contextNote: "Το χωρίο Σ 497–508 αποτελεί κορυφαίο ζήτημα αρχαίου ελληνικού δικαίου: οι δύο διάδικοι προσφεύγουν σε «ίστορα» (εγγυητή/διαιτητή) και στους «γέροντες» που κάθονται στον «ιερό κύκλο» κρατώντας τα «σκήπτρα» των κηρύκων. Η αμφισβήτηση αφορά είτε το αν καταβλήθηκε η «ποινή» (υποχρέωση αποδοχής της αποζημίωσης από τον συγγενή του θύματος) είτε την απόδειξη της πληρωμής μέσω μαρτύρων.",
+                    puzzleInstruction: "Αναλύστε τις 4 δικανικές κρίσεις των γερόντων στην αγορά. Ποιος γέροντας διατυπώνει την κρίση που θεσμοθετεί τη δημόσια αποδεικτική διαδικασία, αποτρέποντας την αντεκδίκηση αίματος;",
+                    hints: [
+                        "Στην ομηρική κοινωνία, η ειρήνη διασφαλίζεται μόνο όταν η ιδιωτική εκδίκηση αντικαθίσταται από δημόσια διαιτησία παρουσία μαρτύρων («ίστωρ»).",
+                        "Αποκλείστε όσους προτείνουν εξορία χωρίς έλεγχο αποδείξεων, μονομαχία ή βίαιη αντεκδίκηση αίματος.",
+                        "Η ορθή κρίση ανήκει στον Γέροντα Γ' (Αλκίνοο), ο οποίος ζητά την προσκόμιση των μαρτύρων της πληρωμής ώστε η «ποινή» να επικυρωθεί δημόσια."
+                    ],
+                    codexEntry: {
+                        title: "Ποινή, Τάλαντον, Ίστωρ & Σκήπτρον",
+                        body: "Η «ποινή» στα ομηρικά έπη δεν σημαίνει τιμωρία φυλάκισης, αλλά την υλική αποζημίωση προς την οικογένεια του θύματος. Ο «ίστωρ» είναι ο μάρτυρας-εγγυητής της συμφωνίας, ενώ το «σκήπτρον» εξασφαλίζει την ιερότητα του δικανικού λόγου."
+                    },
+                    loreSummary: "Δύο ανθρώπινες πολιτείες: μία σε ειρήνη (με γάμους και δικαστική επίλυση διαφορών) και μία σε πολιορκία, αποτυπώνοντας το δίπολο του ανθρώπινου πολιτισμού."
+                },
+                {
+                    id: 2,
+                    shortTitle: "Γ' Κύκλος",
+                    title: "Κύκλος Γ': Ο Κύκλος των Εποχών & Η Αλχημεία των Μετάλλων",
+                    subtitle: "Όργωμα, Θερισμός, Τρύγος & Βοσκή — Τεχνική Νιέλλο (Ιλιάδα Σ 541–589)",
+                    metal: "Χρυσός, Κασσίτερος, Χαλκός & Κύανος (Νιέλλο)",
+                    excerpt: "«Πάνω της έβαλε ένα βαθύ, τριπλοοργωμένο χωράφι («νειόν μαλακήν, τρίπολον»). Κι εκείνο μαύριζε από πίσω καθώς το όργωναν κι έμοιαζε με αληθινό οργωμένο χώμα, αν και ήταν φτιαγμένο από χρυσάφι· τόσο μεγάλο ήταν το θαύμα της τέχνης! Κάθε φορά που οι ζευγάδες έφταναν στην άκρη του αυλακιού, ένας άνδρας τούς έδινε στα χέρια ένα κύπελλο με γλυκό κρασί. Αλλού πάλι, ανάμεσα στα αμπέλια, ένα αγόρι έπαιζε τη φόρμιγγα και τραγουδούσε με λεπτή φωνή τον Λίνο.»",
+                    contextNote: "Ο Όμηρος περιγράφει εδώ την προϊστορική τεχνική της «μεταλλοζωγραφικής» (παρόμοια με το μυκηναϊκό νιέλλο —ένθεση σκούρου θειούχου κράματος πάνω σε χρυσό ή άργυρο). Κάθε αγροτική εργασία συνδέεται με συγκεκριμένο τελετουργικό: το «κύπελλον» (δίωτο ποτήρι οίνου), τον «Λίνο» (θρηνητικό/εορταστικό άσμα της συγκομιδής) και τους κασσιτερένιους φράχτες.",
+                    puzzleInstruction: "Αντιστοιχίστε σωστά και τις τέσσερις αγροτικές σκηνές της ασπίδας με το ακριβές ομηρικό τελετουργικό και μεταλλουργικό τους στοιχείο:",
+                    hints: [
+                        "Συνδέστε το τριπλοοργωμένο χωράφι («τρίπολον») με το χρυσό χώμα που «μαύριζε» (τεχνική νιέλλο/οξείδωσης) και το «κύπελλον».",
+                        "Ο τρύγος συνοδεύεται από το τραγούδι του «Λίνου» και έναν φράχτη από «κασσίτερο» —ένα εύπλαστο, ασημόλευκο μέταλλο.",
+                        "Επιλέξτε: 1→Β, 2→Δ, 3→Α, 4→Γ."
+                    ],
+                    codexEntry: {
+                        title: "Τεχνική Νιέλλο, Κασσίτερος & Ο Λίνος",
+                        body: "Το «νιέλλο» (μέλαν) ήταν αρχαία μεταλλουργική τεχνική ένθεσης μαύρου κράματος (χαλκού, αργύρου, μολύβδου και θείου) πάνω σε χρυσό για ρεαλιστικές σκιάσεις. Ο «Λίνος» ήταν αρχέγονος ύμνος για τον θάνατο και την αναγέννηση της βλάστησης."
+                    },
+                    loreSummary: "Ο αέναος κύκλος της αγροτικής ζωής, αποδοσμένος με θαυμαστή πολυχρωμία κραμάτων χρυσού, κασσιτέρου και σκούρου νιέλλο."
+                },
+                {
+                    id: 3,
+                    shortTitle: "Δ' Κύκλος",
+                    title: "Κύκλος Δ': Ο Χορός του Δαιδάλου στην Κνωσό",
+                    subtitle: "Η Τελετουργική Κίνηση & Ο Τροχός του Κεραμέα (Ιλιάδα Σ 590–606)",
+                    metal: "Χρυσός, Άργυρος & Λεπτουργημένος Χαλκός",
+                    excerpt: "«Πάνω της ο ξακουστός αμφιγυήεις —ο θεός με τα δύο δυνατά αλλά κουτσά πόδια— φιλοτέχνησε έναν χορό όμοιο με εκείνον που κάποτε στην πλατιά Κνωσό είχε φτιάξει ο Δαίδαλος για την καλλιπλόκαμη Αριάδνη. Εκεί χόρευαν νέοι και πολυμνήστες παρθένες κρατώντας ο ένας τον άλλον από τον καρπό («επί καρπώ»). Οι κοπέλες φορούσαν λεπτές λινές οθόνες —αέρινα υφάσματα που έλαμπαν απαλά σαν αλειμμένα με λάδι— ενώ οι νέοι φορούσαν καλοϋφασμένους χιτώνες και χρυσές μάχαιρες κρεμασμένες από ασημένιους τελαμώνες.»",
+                    contextNote: "Στους αρχαϊκούς κυκλικούς χορούς, οι χορευτές πιάνονταν «επί καρπώ» (από τον καρπό), σχηματίζοντας μια αδιάσπαστη αλυσίδα. Ο Όμηρος παρομοιάζει την αρμονία τους με τον «τροχό του κεραμέως» —τον περιστρεφόμενο δίσκο του αγγειοπλάστη— και ολοκληρώνει τη σκηνή με δύο «κυβιστητήρες» (ακροβάτες) που εξάρχουν του χορού.",
+                    puzzleInstruction: "Ανασυνθέστε τη χορογραφική και ενδυματολογική αλληλουχία της σκηνής της Κνωσού τοποθετώντας και τα 5 στάδια στη σωστή κειμενική σειρά (Βήμα 1 έως Βήμα 5):",
+                    hints: [
+                        "Η περιγραφή ξεκινά από την αρχιτεκτονική αναφορά στον Δαίδαλο της Κνωσού και την Αριάδνη (Βήμα 1).",
+                        "Ακολουθεί η λαβή «επί καρπώ», η ενδυμασία («οθόνες» & «τελαμώνες»), η κυκλική περιστροφή σαν τροχός κεραμέα, οι αντικριστές σειρές και τέλος η εμφάνιση των δύο ακροβατών («κυβιστητήρες»).",
+                        "Σωστή σειρά: 1. Δαίδαλος στην Κνωσό → 2. Λαβή επί καρπώ & οθόνες/τελαμώνες → 3. Κυκλική περιστροφή σαν τροχός κεραμέα → 4. Αντικριστές σειρές χορευτών → 5. Πλήθος θεατών & δύο κυβιστητήρες στο κέντρο."
+                    ],
+                    codexEntry: {
+                        title: "Επί Καρπώ, Οθόνες & Κυβιστητήρες",
+                        body: "Η λαβή «επί καρπώ» (από τον καρπό) απαντά ήδη στη μινωική εικονογραφία. Οι «οθόνες» ήταν λεπτά λινά υφάσματα επεξεργασμένα με έλαιο για μεταξένια λάμψη, ενώ οι «κυβιστητήρες» εκτελούσαν τελετουργικά άλματα."
+                    },
+                    loreSummary: "Ο κυκλικός χορός της νεότητας κατά το πρότυπο του Δαιδάλου στην Κνωσό, που συνδέει τη μινωική κληρονομιά με την αρχαϊκή γιορτή."
+                },
+                {
+                    id: 4,
+                    shortTitle: "Ε' Κύκλος",
+                    title: "Κύκλος Ε': Η Άντυξ & Το Μυστικό των Πέντε Πτυχών",
+                    subtitle: "Ο Ποταμός Ωκεανός & Η Στρωματογραφία του Όπλου (Ιλιάδα Σ 607–608 & Υ 268–272)",
+                    metal: "5 Επάλληλες Πτύχες: Χαλκός, Κασσίτερος & Χρυσός",
+                    excerpt: "«Γύρω-γύρω στην εξωτερική άντυγα —την ενισχυμένη περιμετρική στεφάνη της καλοφτιαγμένης ασπίδας— έβαλε τη μεγάλη δύναμη του ποταμού Ωκεανού. Κι αργότερα στη μάχη, όταν το δόρυ του Αινεία χτύπησε την ασπίδα, τρύπησε τις δύο πρώτες πτύχες —τα εξωτερικά στρώματα χαλκού— μα σταμάτησε στη χρυσή πτυχή που είχε βάλει στη μέση ο θεός, πριν φτάσει στις δύο εσωτερικές πτύχες κασσιτέρου.»",
+                    contextNote: "Ο Ωκεανός στην «άντυγα» λειτουργεί ως κοσμικό σύνορο που συγκρατεί ολόκληρο το σύμπαν εντός του. Ταυτόχρονα, η εσωτερική στρωματογραφία της ασπίδας αποκαλύπτει την ιδιοφυΐα του Ηφαίστου: 5 μεταλλικά φύλλα («πτύχες») τοποθετημένα συμμετρικά από έξω προς τα μέσα.",
+                    puzzleInstruction: "Για να σφραγίσετε οριστικά την ασπίδα, ρυθμίστε τη σωστή διαστρωμάτωση των 5 μεταλλικών πτυχών (από το εξωτερικό χτύπημα έως το εσωτερικό χέρι του Αχιλλέα) και επιβεβαιώστε το στοιχείο της άντυγος.",
+                    hints: [
+                        "Συμβουλευτείτε προσεκτικά το απόσπασμα από τη ραψωδία Υ: το δόρυ του Αινεία τρύπησε πρώτα δύο στρώματα χαλκού.",
+                        "Αμέσως μετά τα δύο εξωτερικά στρώματα χαλκού βρισκόταν το κεντρικό στρώμα χρυσού, που απορρόφησε την ορμή του δόρατος.",
+                        "Σωστή διάταξη από έξω προς τα μέσα: 1. Χαλκός, 2. Χαλκός, 3. Χρυσός, 4. Κασσίτερος, 5. Κασσίτερος — με εξωτερικό όριο τον Ποταμό Ωκεανό."
+                    ],
+                    codexEntry: {
+                        title: "Άντυξ & Πεντάπτυχη Θωράκιση",
+                        body: "Η «άντυξ» ήταν η κυκλική μεταλλική στεφάνη που έδινε δομική ακαμψία στην ασπίδα. Η διαστρωμάτωση (2 Χαλκού – 1 Χρυσού – 2 Κασσιτέρου) αξιοποιούσε τη σκληρότητα του εξωτερικού χαλκού και την ελατότητα του εσωτερικού χρυσού και κασσιτέρου."
+                    },
+                    loreSummary: "Ο Ποταμός Ωκεανός στην εξωτερική άντυγα αγκαλιάζει το σύμπαν, ενώ οι 5 επάλληλες πτύχες (Χαλκός-Χαλκός-Χρυσός-Κασσίτερος-Κασσίτερος) καθιστούν την ασπίδα απόρθητη."
+                }
+            ]
+        };
+
+        /* ============================================================================
+           APPLICATION STATE
+           ============================================================================ */
+        let currentDifficulty = 'adults';
+        let currentStageIdx = 0;
+        let unlockedRings = [false, false, false, false, false];
+        let hintsUsedCount = 0;
+        let stageHintsRevealed = [0, 0, 0, 0, 0];
+        let startTime = null;
+        let elapsedSeconds = 0;
+        let timerInterval = null;
+
+        // Puzzle-specific interactive state
+        let astrolabeAngle = 90;
+        let selectedConstellation = null;
+        let selectedElder = null;
+        let seasonMatches = { 0: "", 1: "", 2: "", 3: "" };
+        let danceOrder = [];
+        let shieldLayers = ["Χαλκός", "Χρυσός", "Κασσίτερος", "Χαλκός", "Κασσίτερος"];
+        let kidsMetalsSelected = { "Χαλκός": false, "Χρυσός": false, "Κασσίτερος": false, "Σίδηρος": false };
+        let selectedRimElement = "";
+
+        function getActiveStages() {
+            return CURRICULUM[currentDifficulty];
+        }
+
+        function initDanceOrderForDifficulty(diff) {
+            if (diff === 'kids') {
+                danceOrder = [
+                    { id: "b", text: "Όλοι πιάνονται από τον καρπό και τρέχουν γρήγορα σε έναν τέλειο κύκλο, σαν τον τροχό του αγγειοπλάστη." },
+                    { id: "a", text: "Ο Ήφαιστος σμιλεύει τον χορό της Κνωσού, όπως τον έφτιαξε ο Δαίδαλος για την Αριάδνη." },
+                    { id: "c", text: "Ο κύκλος ανοίγει σε δύο αντικριστές σειρές, ενώ δύο ακροβάτες κάνουν τούμπες στο κέντρο." }
+                ];
+            } else if (diff === 'teens') {
+                danceOrder = [
+                    { id: "c", text: "Κυκλική περιστροφή των χορευτών με ταχύτητα και αρμονία όμοια με τον τροχό του κεραμέα (αγγειοπλάστη)." },
+                    { id: "a", text: "Σχεδιασμός του χορού κατά το πρότυπο εκείνου που έφτιαξε ο Δαίδαλος στην πλατιά Κνωσό για την Αριάδνη." },
+                    { id: "d", text: "Διάλυση του κύκλου σε δύο αντικριστές σειρές που τρέχουν η μία προς την άλλη, με δύο ακροβάτες στο κέντρο." },
+                    { id: "b", text: "Νέοι με χρυσές μάχαιρες σε ασημένιους τελαμώνες και παρθένες με λεπτές λινές οθόνες πιάνονται από τον καρπό." }
+                ];
+            } else {
+                danceOrder = [
+                    { id: "c", text: "Κυκλική περιστροφή «επί καρπώ» με ταχύτητα και συμμετρία όμοια με τον τροχό του κεραμέως." },
+                    { id: "a", text: "Αρχιτεκτονική σύλληψη κατά το μινωικό πρότυπο του Δαιδάλου στην πλατιά Κνωσό για την καλλιπλόκαμη Αριάδνη." },
+                    { id: "e", text: "Συγκέντρωση πλήθους θεατών γύρω από τον ιερό χορό και είσοδος δύο «κυβιστητήρων» (ακροβατών) στο κέντρο." },
+                    { id: "b", text: "Νέοι με χρυσές μάχαιρες σε ασημένιους τελαμώνες και παρθένες με ελαιωμένες λινές οθόνες παρατάσσονται." },
+                    { id: "d", text: "Μετάβαση από τον κλειστό κύκλο σε δύο αντικριστές σειρές («στίχας») που εφορμούν ρυθμικά η μία προς την άλλη." }
+                ];
+            }
+        }
+
+        /* ============================================================================
+           INITIALIZATION, LEVEL SWITCHING & NAVIGATION
+           ============================================================================ */
+        function openLevelSelector() {
+            playTone('click');
+            clearInterval(timerInterval);
+            document.getElementById('game-workspace').classList.add('hidden');
+            document.getElementById('victory-screen').classList.add('hidden');
+            document.getElementById('change-level-btn').classList.add('hidden');
+            document.getElementById('header-subtitle').textContent = "Αρχαιολογική & Φιλολογική Αναζήτηση στην Ιλιάδα (Ραψωδία Σ)";
+            document.getElementById('intro-screen').classList.remove('hidden');
+        }
+
+        function startGame(difficultyKey = 'adults') {
+            currentDifficulty = difficultyKey;
+            playTone('unlock');
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('victory-screen').classList.add('hidden');
+            document.getElementById('game-workspace').classList.remove('hidden');
+            document.getElementById('change-level-btn').classList.remove('hidden');
+
+            const meta = DIFFICULTY_META[currentDifficulty];
+            document.getElementById('header-level-label').textContent = meta.badge;
+            document.getElementById('header-subtitle').textContent = meta.fullTitle;
+
+            resetStateValues();
+            clearInterval(timerInterval);
+            startTime = Date.now();
+            timerInterval = setInterval(() => {
+                elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+            }, 1000);
+
+            updateShieldSVG();
+            renderShieldPills();
+            renderCodex();
+            renderStage(0);
+        }
+
+        function resetStateValues() {
+            currentStageIdx = 0;
+            unlockedRings = [false, false, false, false, false];
+            hintsUsedCount = 0;
+            stageHintsRevealed = [0, 0, 0, 0, 0];
+            astrolabeAngle = currentDifficulty === 'kids' ? 45 : 90;
+            selectedConstellation = null;
+            selectedElder = null;
+            seasonMatches = { 0: "", 1: "", 2: "", 3: "" };
+            initDanceOrderForDifficulty(currentDifficulty);
+            shieldLayers = ["Χαλκός", "Χρυσός", "Κασσίτερος", "Χαλκός", "Κασσίτερος"];
+            kidsMetalsSelected = { "Χαλκός": false, "Χρυσός": false, "Κασσίτερος": false, "Σίδηρος": false };
+            selectedRimElement = "";
+        }
+
+        function resetGame() {
+            startGame(currentDifficulty);
+        }
+
+        function updateShieldSVG() {
+            for (let i = 0; i < 5; i++) {
+                const el = document.getElementById(`svg-ring-${i}`);
+                el.classList.remove('locked', 'active', 'unlocked');
+                if (unlockedRings[i]) {
+                    el.classList.add('unlocked');
+                } else if (i === currentStageIdx) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.add('locked');
+                }
+            }
+            const completedCount = unlockedRings.filter(Boolean).length;
+            document.getElementById('header-progress-text').textContent = `${completedCount} / 5`;
+            document.getElementById('shield-status-label').textContent =
+                completedCount === 5 ? "Πλήρης Σφυρηλάτηση" : `Επίπεδο ${currentStageIdx + 1} από 5`;
+        }
+
+        function renderShieldPills() {
+            const stages = getActiveStages();
+            const container = document.getElementById('ring-pills');
+            container.innerHTML = stages.map((st, idx) => {
+                const isUnlocked = unlockedRings[idx];
+                const isCurrent = idx === currentStageIdx;
+                let classes = "py-1.5 px-1 rounded-lg text-[11px] font-medium border text-center transition ";
+                if (isUnlocked) {
+                    classes += "bg-[#D4AF37]/20 border-[#D4AF37] text-[#D4AF37] cursor-pointer";
+                } else if (isCurrent) {
+                    classes += "bg-[#C84B31]/20 border-[#C84B31] text-[#EFECE6] cursor-pointer";
+                } else {
+                    classes += "bg-[#12100E] border-[#3D352E] text-[#A89F91]/50 cursor-not-allowed";
+                }
+                return `<button onclick="selectStageTab(${idx})" class="${classes}">${st.shortTitle}</button>`;
+            }).join('');
+        }
+
+        function selectStageTab(idx) {
+            if (unlockedRings[idx] || idx === currentStageIdx) {
+                playTone('click');
+                renderStage(idx);
+                inspectRing(idx);
+            } else {
+                showToast("Πρέπει πρώτα να αποκρυπτογραφήσετε τους εσωτερικούς κύκλους με τη σειρά.", "warn");
+            }
+        }
+
+        function inspectRing(idx) {
+            const box = document.getElementById('ring-inspector-box');
+            const st = getActiveStages()[idx];
+            if (!unlockedRings[idx] && idx !== currentStageIdx) {
+                box.innerHTML = `<span class="text-[#A89F91] font-semibold block mb-1">Κλειδωμένος Κύκλος (${st.shortTitle}):</span>Απαιτείται πρώτα η αποκρυπτογράφηση των προηγούμενων ομόκεντρων ζωνών.`;
+                return;
+            }
+            box.innerHTML = `
+                <span class="text-[#D4AF37] font-semibold block mb-1">${st.title}</span>
+                <span class="text-[#CD7F32] block mb-1">Μέταλλα: ${st.metal}</span>
+                <p class="text-[#EFECE6]/85">${unlockedRings[idx] ? st.loreSummary : "Υπό διερεύνηση... Λύστε τον γρίφο στα δεξιά για να σφυρηλατήσετε αυτόν τον κύκλο."}</p>
+            `;
+        }
+
+        /* ============================================================================
+           STAGE RENDERER & PUZZLE INTERFACES
+           ============================================================================ */
+        function renderStage(idx) {
+            currentStageIdx = idx;
+            updateShieldSVG();
+            renderShieldPills();
+            inspectRing(idx);
+
+            const st = getActiveStages()[idx];
+            const container = document.getElementById('stage-container');
+            const isAlreadySolved = unlockedRings[idx];
+
+            container.innerHTML = `
+                <div class="relic-card rounded-2xl p-6 sm:p-8 fade-in">
+                    <!-- Stage Header -->
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#D4AF37]/20 pb-4 mb-5">
+                        <div>
+                            <span class="text-xs font-cinzel tracking-widest text-[#CD7F32] uppercase block mb-1">${st.subtitle}</span>
+                            <h2 class="font-cinzel text-xl sm:text-2xl font-bold text-[#EFECE6]">${st.title}</h2>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs border ${isAlreadySolved ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-[#D4AF37]' : 'bg-[#27221D] border-[#D4AF37]/30 text-[#A89F91]'}">
+                            ${isAlreadySolved ? '✓ Σφυρηλατήθηκε' : st.metal}
+                        </span>
+                    </div>
+
+                    <!-- Primary Homeric Text Excerpt -->
+                    <div class="mb-5">
+                        <div class="text-xs font-semibold uppercase tracking-wider text-[#D4AF37] mb-2 flex items-center gap-2">
+                            <span>Ομηρικό Τεκμήριο (Ιλιάδα, Ραψωδία Σ)</span>
+                        </div>
+                        <blockquote class="font-serif-narrative italic text-sm sm:text-base text-[#EFECE6] bg-[#12100E] p-4 sm:p-5 rounded-xl border-l-4 border-[#D4AF37] leading-relaxed">
+                            ${st.excerpt}
+                        </blockquote>
+                    </div>
+
+                    <!-- Archaeological & Philological Context (Zero Doubt Rule) -->
+                    <div class="mb-6 bg-[#27221D]/70 p-4 rounded-xl border border-[#D4AF37]/15 text-xs sm:text-sm text-[#EFECE6]/90 leading-relaxed">
+                        <span class="font-semibold text-[#E5C76B] block mb-1">Ιστορικό &amp; Μεταλλουργικό Πλαίσιο:</span>
+                        ${st.contextNote}
+                    </div>
+
+                    <!-- Puzzle Workspace -->
+                    <div class="border-t border-[#D4AF37]/20 pt-5">
+                        <h3 class="font-cinzel text-base sm:text-lg font-bold text-[#D4AF37] mb-2">
+                            Δοκιμασία Αποκρυπτογράφησης
+                        </h3>
+                        <p class="text-xs sm:text-sm text-[#A89F91] mb-5 leading-relaxed">
+                            ${st.puzzleInstruction}
+                        </p>
+
+                        <!-- Interactive Puzzle Controls -->
+                        <div id="puzzle-interactive-area" class="mb-6">
+                            ${renderPuzzleHTML(idx)}
+                        </div>
+
+                        <!-- Action Bar: Hint + Submit -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-[#D4AF37]/15">
+                            <button onclick="requestHint(${idx})" class="btn-ghost-gold px-4 py-2.5 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                                <span>Υπόδειξη (${stageHintsRevealed[idx]}/3)</span>
+                            </button>
+
+                            <button onclick="verifyStage(${idx})" class="btn-bronze px-6 py-2.5 rounded-xl font-cinzel font-bold text-sm tracking-wide">
+                                ${isAlreadySolved ? 'Επανέλεγχος Κύκλου' : 'Σφυρηλάτηση Κύκλου'}
+                            </button>
+                        </div>
+
+                        <!-- Revealed Hints Area -->
+                        <div id="hints-display-area" class="mt-4 space-y-2">
+                            ${renderHintsHTML(idx)}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderHintsHTML(idx) {
+            const count = stageHintsRevealed[idx];
+            if (count === 0) return '';
+            const st = getActiveStages()[idx];
+            let html = '';
+            for (let i = 0; i < count; i++) {
+                html += `
+                    <div class="p-3 rounded-lg bg-[#D4AF37]/10 border border-[#D4AF37]/30 text-xs text-[#EFECE6]/90">
+                        <strong class="text-[#D4AF37]">Υπόδειξη ${i + 1}:</strong> ${st.hints[i]}
+                    </div>
+                `;
+            }
+            return html;
+        }
+
+        function requestHint(idx) {
+            playTone('click');
+            if (stageHintsRevealed[idx] < 3) {
+                stageHintsRevealed[idx]++;
+                hintsUsedCount++;
+                renderStage(idx);
+            } else {
+                showToast("Έχετε ήδη αποκαλύψει και τις 3 διαθέσιμες υποδείξεις για αυτόν τον κύκλο.", "info");
+            }
+        }
+
+        /* ============================================================================
+           PUZZLE SPECIFIC UI BUILDERS (ADAPTED PER DIFFICULTY TIER)
+           ============================================================================ */
+        function renderPuzzleHTML(idx) {
+            /* -------------------- STAGE 0: CELESTIAL ASTROLABE -------------------- */
+            if (idx === 0) {
+                const constellations = [
+                    { id: "pleiades", name: "Οι Πλειάδες (Το σμήνος της Άνοιξης)" },
+                    { id: "hyades", name: "Οι Υάδες (Τα αστέρια των βροχών)" },
+                    { id: "orion", name: "Ο Ορίων (Ο ουράνιος κυνηγός)" },
+                    { id: "ursa", name: "Η Άρκτος / Άμαξα (Ο βόρειος αστερισμός)" }
+                ];
+                const normalizedDeg = ((astrolabeAngle % 360) + 360) % 360;
+                const isAligned = normalizedDeg === 0;
+
+                return `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 items-center bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20">
+                        <div class="flex flex-col items-center">
+                            <svg viewBox="0 0 300 300" class="w-56 h-56">
+                                <circle cx="150" cy="150" r="142" fill="#16293D" stroke="#D4AF37" stroke-width="3"/>
+                                <text x="150" y="22" text-anchor="middle" fill="#9CC4E4" font-size="9" font-family="Cinzel">ΩΚΕΑΝΟΣ (ΟΡΙΖΟΝΤΑΣ ΔΥΣΗΣ)</text>
+                                <text x="150" y="286" text-anchor="middle" fill="#9CC4E4" font-size="9" font-family="Cinzel">ΩΚΕΑΝΟΣ (ΟΡΙΖΟΝΤΑΣ ΔΥΣΗΣ)</text>
+                                <circle cx="150" cy="150" r="118" fill="#0F111A" stroke="#5A8BB0" stroke-width="1"/>
+                                <g id="celestial-wheel" style="transform: rotate(${astrolabeAngle}deg);">
+                                    <line x1="150" y1="35" x2="150" y2="265" stroke="#D4AF37" stroke-opacity="0.2" stroke-dasharray="4 4"/>
+                                    <line x1="35" y1="150" x2="265" y2="150" stroke="#D4AF37" stroke-opacity="0.2" stroke-dasharray="4 4"/>
+                                    <circle cx="150" cy="150" r="32" fill="rgba(212,175,55,0.14)" stroke="#D4AF37" stroke-dasharray="2 2"/>
+                                    <text x="150" y="143" text-anchor="middle" fill="#D4AF37" font-size="9" font-weight="bold">ΑΡΚΤΟΣ</text>
+                                    <circle cx="142" cy="155" r="2.2" fill="#FFF"/>
+                                    <circle cx="150" cy="157" r="2.2" fill="#FFF"/>
+                                    <circle cx="158" cy="153" r="2.2" fill="#FFF"/>
+                                    <text x="150" y="52" text-anchor="middle" fill="#E88D7A" font-size="9">ΟΡΙΩΝ</text>
+                                    <text x="235" y="153" text-anchor="middle" fill="#A89F91" font-size="8">ΠΛΕΙΑΔΕΣ</text>
+                                    <text x="65" y="153" text-anchor="middle" fill="#A89F91" font-size="8">ΥΑΔΕΣ</text>
+                                    <text x="150" y="255" text-anchor="middle" fill="#E5C76B" font-size="8">ΗΛΙΟΣ &amp; ΣΕΛΗΝΗ</text>
+                                </g>
+                            </svg>
+                            <div class="flex items-center gap-2 mt-3">
+                                <button onclick="rotateAstrolabe(-45)" class="btn-ghost-gold px-3 py-1 rounded text-xs">↺ -45°</button>
+                                <span class="text-xs font-mono ${isAligned ? 'text-[#4ADE80] font-bold' : 'text-[#D4AF37]'} px-2">
+                                    Γωνία: ${normalizedDeg}° ${isAligned ? '✓' : ''}
+                                </span>
+                                <button onclick="rotateAstrolabe(45)" class="btn-ghost-gold px-3 py-1 rounded text-xs">↻ +45°</button>
+                            </div>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <p class="text-xs text-[#EFECE6]/85 mb-2 leading-relaxed">
+                                ${currentDifficulty === 'kids'
+                                    ? '<strong>Βήμα 1:</strong> Γυρίστε τον αστρολάβο στις <strong>0°</strong>.<br><strong>Βήμα 2:</strong> Δείτε ποιος αστερισμός μένει στο κέντρο χωρίς να αγγίζει τη μπλε θάλασσα του Ωκεανού:'
+                                    : '<strong>Βήμα 1:</strong> Ευθυγραμμίστε τον αστρολάβο στις <strong>0°</strong>.<br><strong>Βήμα 2:</strong> Επιλέξτε το ουράνιο σώμα που <strong>δεν λούζεται ποτέ</strong> στον Ωκεανό:'}
+                            </p>
+                            ${constellations.map(c => `
+                                <button onclick="selectConstellation('${c.id}')" class="w-full text-left p-3 rounded-lg border text-xs sm:text-sm transition ${selectedConstellation === c.id ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-[#FFF]' : 'bg-[#1E1A16] border-[#3D352E] text-[#A89F91] hover:border-[#D4AF37]/50'}">
+                                    ${c.name}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            /* -------------------- STAGE 1: TWO CITIES & TRIAL -------------------- */
+            if (idx === 1) {
+                if (currentDifficulty === 'kids') {
+                    const kidsChoices = [
+                        {
+                            id: "kids_wrong1",
+                            title: "Επιλογή Α: Έπαθλο για τον πιο δυνατό πολεμιστή",
+                            desc: "Τα δύο τάλαντα χρυσού θα δοθούν σε όποιον νικήσει σε μονομαχία έξω από την πόλη."
+                        },
+                        {
+                            id: "kids_correct",
+                            title: "Επιλογή Β: Αμοιβή για τον πιο δίκαιο δικαστή",
+                            desc: "Τα δύο τάλαντα χρυσού θα δοθούν σε εκείνον τον σοφό γέροντα που θα προτείνει την πιο δίκαιη και ειρηνική λύση μπροστά στον λαό."
+                        },
+                        {
+                            id: "kids_wrong2",
+                            title: "Επιλογή Γ: Φόρος για το χτίσιμο νέων τειχών",
+                            desc: "Ο χρυσός ανήκει στους στρατιώτες για να αγοράσουν νέα δόρατα και περικεφαλαίες."
+                        }
+                    ];
+                    return `
+                        <div class="space-y-3">
+                            ${kidsChoices.map(ch => `
+                                <div onclick="selectElder('${ch.id}')" class="p-4 rounded-xl border cursor-pointer transition ${selectedElder === ch.id ? 'bg-[#D4AF37]/15 border-[#D4AF37]' : 'bg-[#12100E] border-[#3D352E] hover:border-[#D4AF37]/50'}">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span class="font-cinzel font-bold text-sm text-[#D4AF37]">${ch.title}</span>
+                                        <span class="w-4 h-4 rounded-full border flex items-center justify-center ${selectedElder === ch.id ? 'border-[#D4AF37] bg-[#D4AF37]' : 'border-[#A89F91]'}"></span>
+                                    </div>
+                                    <p class="font-serif-narrative text-xs sm:text-sm text-[#EFECE6]/90 leading-relaxed">${ch.desc}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+
+                if (currentDifficulty === 'teens') {
+                    const teenElders = [
+                        {
+                            id: "teen_w1",
+                            name: "Γέροντας Α' (Θρασυμήδης)",
+                            verdict: "«Αφού διαφωνούν για το αν πληρώθηκε η ποινή, ας μονομαχήσουν έξω από τα τείχη ώστε να κρίνει η δύναμη των όπλων.»"
+                        },
+                        {
+                            id: "teen_correct",
+                            name: "Γέροντας Β' (Αλκίνοος)",
+                            verdict: "«Ας παρουσιαστούν ενώπιον του λαού οι μάρτυρες της πληρωμής· αν αποδειχθεί ότι δόθηκε η ποινή (η αποζημίωση), η διαφορά λήγει ειρηνικά, αλλιώς να καταβληθεί αμέσως παρουσία όλων.»"
+                        },
+                        {
+                            id: "teen_w2",
+                            name: "Γέροντας Γ' (Ευρύμαχος)",
+                            verdict: "«Να εξοριστεί ο κατηγορούμενος χωρίς να ακούσουμε μάρτυρες, για να τελειώνει γρήγορα η φασαρία στην αγορά.»"
+                        }
+                    ];
+                    return `
+                        <div class="space-y-3">
+                            ${teenElders.map(el => `
+                                <div onclick="selectElder('${el.id}')" class="p-4 rounded-xl border cursor-pointer transition ${selectedElder === el.id ? 'bg-[#D4AF37]/15 border-[#D4AF37]' : 'bg-[#12100E] border-[#3D352E] hover:border-[#D4AF37]/50'}">
+                                    <div class="flex items-center justify-between mb-1.5">
+                                        <span class="font-cinzel font-bold text-sm text-[#D4AF37]">${el.name}</span>
+                                        <span class="w-4 h-4 rounded-full border flex items-center justify-center ${selectedElder === el.id ? 'border-[#D4AF37] bg-[#D4AF37]' : 'border-[#A89F91]'}"></span>
+                                    </div>
+                                    <p class="font-serif-narrative text-xs sm:text-sm text-[#EFECE6]/90 leading-relaxed">${el.verdict}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+
+                // Adults (4 elders)
+                const elders = [
+                    {
+                        id: "elder1",
+                        name: "Γέροντας Α' (Θρασυμήδης)",
+                        verdict: "«Αφού υπάρχει αμφιβολία για το αν πληρώθηκε η ποινή (η αποζημίωση), ας λύσουν τη διαφορά με μονομαχία έξω από τα τείχη της πόλης, ώστε να αποφασίσουν οι θεοί.»"
+                    },
+                    {
+                        id: "elder2",
+                        name: "Γέροντας Β' (Ευρύμαχος)",
+                        verdict: "«Να εξοριστεί αμέσως ο κατηγορούμενος χωρίς να εξεταστεί αν όντως κατέβαλε τον χρυσό, ώστε να ησυχάσει το πλήθος στην αγορά.»"
+                    },
+                    {
+                        id: "elder3",
+                        name: "Γέροντας Γ' (Αλκίνοος)",
+                        verdict: "«Ας παρουσιαστούν ενώπιον του ίστορος (εγγυητή) και του λαού οι μάρτυρες της συναλλαγής· αν αποδειχθεί η καταβολή της ποινής, η οικογένεια οφείλει να την αποδεχθεί ειρηνικά, αλλιώς να αποδοθεί διπλάσιο βάρος χρυσού.»"
+                    },
+                    {
+                        id: "elder4",
+                        name: "Γέροντας Δ' (Δημόδοκος)",
+                        verdict: "«Τα δύο τάλαντα χρυσού ανήκουν στους κήρυκες· ας μοιραστούν τον χρυσό οι άρχοντες και ας αφήσουν τους συγγενείς να εκδικηθούν όπως ορίζει το παλιό έθιμο του αίματος.»"
+                    }
+                ];
+                return `
+                    <div class="space-y-3">
+                        ${elders.map(el => `
+                            <div onclick="selectElder('${el.id}')" class="p-4 rounded-xl border cursor-pointer transition ${selectedElder === el.id ? 'bg-[#D4AF37]/15 border-[#D4AF37]' : 'bg-[#12100E] border-[#3D352E] hover:border-[#D4AF37]/50'}">
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <span class="font-cinzel font-bold text-sm text-[#D4AF37]">${el.name}</span>
+                                    <span class="w-4 h-4 rounded-full border flex items-center justify-center ${selectedElder === el.id ? 'border-[#D4AF37] bg-[#D4AF37]' : 'border-[#A89F91]'}"></span>
+                                </div>
+                                <p class="font-serif-narrative text-xs sm:text-sm text-[#EFECE6]/90 leading-relaxed">${el.verdict}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            /* -------------------- STAGE 2: SEASONS & METALLURGY -------------------- */
+            if (idx === 2) {
+                const scenes = [
+                    { id: 0, title: "1. Το Όργωμα (Άνοιξη)" },
+                    { id: 1, title: "2. Ο Θερισμός (Καλοκαίρι)" },
+                    { id: 2, title: "3. Ο Τρύγος (Φθινόπωρο)" },
+                    { id: 3, title: "4. Η Βοσκή του Κοπαδιού (Χειμώνας)" }
+                ];
+
+                const options = currentDifficulty === 'kids'
+                    ? [
+                        { val: "", label: "-- Διαλέξτε χρώμα μετάλλου & εικόνα --" },
+                        { val: "A", label: "Λευκός κασσίτερος (φράχτης) & το τραγούδι του Λίνου" },
+                        { val: "B", label: "Χρυσό χώμα που μαυρίζει & κύπελλον με γλυκό κρασί" },
+                        { val: "C", label: "Δίχρωμα βόδια από χρυσό και κασσίτερο στο λιβάδι" },
+                        { val: "D", label: "Λαμπερά χρυσά στάχυα με τον βασιλιά να χαμογελά" }
+                    ]
+                    : [
+                        { val: "", label: "-- Επιλέξτε ομηρικό & μεταλλουργικό στοιχείο --" },
+                        { val: "A", label: "Τραγούδι του «Λίνου» με φόρμιγγα & φράχτης από λευκό κασσίτερο" },
+                        { val: "B", label: "Χρυσό χώμα που μαυρίζει τεχνητά & προσφορά κρασιού σε «κύπελλον»" },
+                        { val: "C", label: "Βόδια σφυρηλατημένα από χρυσό και κασσίτερο, με δύο λιοντάρια" },
+                        { val: "D", label: "Βασιλιάς που στέκει σιωπηλός με το «σκήπτρο» γεμάτος χαρά για τη σοδειά" }
+                    ];
+
+                return `
+                    <div class="space-y-3 bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20">
+                        ${scenes.map(sc => `
+                            <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 items-center p-2.5 rounded-lg bg-[#1E1A16] border border-[#3D352E]">
+                                <label class="sm:col-span-5 text-xs sm:text-sm font-semibold text-[#E5C76B]">${sc.title}</label>
+                                <select onchange="updateSeasonMatch(${sc.id}, this.value)" class="sm:col-span-7 bg-[#12100E] text-[#EFECE6] text-xs p-2.5 rounded-lg border border-[#D4AF37]/30 focus:outline-none focus:border-[#D4AF37]">
+                                    ${options.map(opt => `<option value="${opt.val}" ${seasonMatches[sc.id] === opt.val ? 'selected' : ''}>${opt.label}</option>`).join('')}
+                                </select>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            /* -------------------- STAGE 3: CHOREOGRAPHIC SEQUENCE -------------------- */
+            if (idx === 3) {
+                return `
+                    <div class="space-y-2.5 bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20">
+                        <p class="text-xs text-[#A89F91] mb-2">Χρησιμοποιήστε τα βέλη (▲ / ▼) για να βάλετε τα ${danceOrder.length} στάδια του χορού στη σωστή σειρά από πάνω προς τα κάτω:</p>
+                        ${danceOrder.map((step, i) => `
+                            <div class="flex items-center justify-between gap-3 p-3 rounded-lg bg-[#1E1A16] border border-[#D4AF37]/25">
+                                <div class="flex items-start gap-3">
+                                    <span class="w-6 h-6 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37] text-[#D4AF37] font-cinzel font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                                        ${i + 1}
+                                    </span>
+                                    <span class="text-xs sm:text-sm text-[#EFECE6]/90 leading-relaxed">${step.text}</span>
+                                </div>
+                                <div class="flex flex-col gap-1 shrink-0">
+                                    <button onclick="moveDanceStep(${i}, -1)" ${i === 0 ? 'disabled' : ''} class="px-2 py-0.5 rounded bg-[#27221D] text-xs text-[#D4AF37] disabled:opacity-25 hover:bg-[#D4AF37]/20">▲</button>
+                                    <button onclick="moveDanceStep(${i}, 1)" ${i === danceOrder.length - 1 ? 'disabled' : ''} class="px-2 py-0.5 rounded bg-[#27221D] text-xs text-[#D4AF37] disabled:opacity-25 hover:bg-[#D4AF37]/20">▼</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            /* -------------------- STAGE 4: FINAL SYNTHESIS -------------------- */
+            if (idx === 4) {
+                if (currentDifficulty === 'kids') {
+                    const metalsList = ["Χαλκός", "Χρυσός", "Κασσίτερος", "Σίδηρος"];
+                    return `
+                        <div class="space-y-4 bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20">
+                            <div>
+                                <span class="text-xs font-semibold text-[#D4AF37] block mb-2">Α. Επιλέξτε τα 3 μέταλλα που χρησιμοποίησε ο Ήφαιστος για τις πτύχες της ασπίδας (προσοχή, ένα περισσεύει!):</span>
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                    ${metalsList.map(m => `
+                                        <button onclick="toggleKidsMetal('${m}')" class="p-3 rounded-lg border text-xs font-semibold transition ${kidsMetalsSelected[m] ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-white' : 'bg-[#1E1A16] border-[#3D352E] text-[#A89F91]'}">
+                                            ${kidsMetalsSelected[m] ? '✓ ' : ''}${m}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <div class="pt-3 border-t border-[#D4AF37]/15">
+                                <span class="text-xs font-semibold text-[#D4AF37] block mb-2">Β. Ποιο μεγάλο ποτάμι έβαλε ο θεός γύρω-γύρω στην εξωτερική άντυγα (στεφάνη);</span>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                    ${["Τον Ποταμό Ωκεανό", "Τον Όλυμπο", "Τον Ποταμό Σκάμανδρο"].map(opt => `
+                                        <button onclick="selectRim('${opt}')" class="p-2.5 rounded-lg border text-xs font-medium transition ${selectedRimElement === opt ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-white' : 'bg-[#1E1A16] border-[#3D352E] text-[#A89F91]'}">
+                                            ${opt}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Teens & Adults: 5-layer stratigraphy + Oceanus rim
+                const layerDescriptions = [
+                    "Πτυχή 1 (Εξωτερική επιφάνεια — δέχεται πρώτη το χτύπημα):",
+                    "Πτυχή 2 (Δεύτερο εξωτερικό στρώμα):",
+                    "Πτυχή 3 (Κεντρικός πυρήνας — σταματά το δόρυ του Αινεία):",
+                    "Πτυχή 4 (Πρώτο εσωτερικό στρώμα):",
+                    "Πτυχή 5 (Εσώτατη επιφάνεια — προς τον βραχίονα του Αχιλλέα):"
+                ];
+                return `
+                    <div class="space-y-4 bg-[#12100E] p-4 rounded-xl border border-[#D4AF37]/20">
+                        <div>
+                            <span class="text-xs font-semibold text-[#D4AF37] block mb-2">Α. Διαστρωμάτωση των 5 Μεταλλικών Πτυχών:</span>
+                            <div class="space-y-2">
+                                ${shieldLayers.map((metal, i) => `
+                                    <div class="flex flex-wrap items-center justify-between gap-2 p-2.5 rounded-lg bg-[#1E1A16] border border-[#3D352E]">
+                                        <span class="text-xs text-[#EFECE6]/85">${layerDescriptions[i]}</span>
+                                        <select onchange="updateShieldLayer(${i}, this.value)" class="bg-[#12100E] text-[#D4AF37] font-semibold text-xs px-3 py-1.5 rounded border border-[#D4AF37]/40">
+                                            <option value="Χαλκός" ${metal === 'Χαλκός' ? 'selected' : ''}>Χαλκός</option>
+                                            <option value="Χρυσός" ${metal === 'Χρυσός' ? 'selected' : ''}>Χρυσός</option>
+                                            <option value="Κασσίτερος" ${metal === 'Κασσίτερος' ? 'selected' : ''}>Κασσίτερος</option>
+                                        </select>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-[#D4AF37]/15">
+                            <span class="text-xs font-semibold text-[#D4AF37] block mb-2">Β. Τι τοποθέτησε ο Ήφαιστος στην εξωτερική άντυγα (στεφάνη) για να περικλείσει όλο το έργο;</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                                ${["Τον Ποταμό Ωκεανό", "Τον Όλυμπο", "Τον Ποταμό Σκάμανδρο"].map(opt => `
+                                    <button onclick="selectRim('${opt}')" class="p-2.5 rounded-lg border text-xs font-medium transition ${selectedRimElement === opt ? 'bg-[#D4AF37]/20 border-[#D4AF37] text-white' : 'bg-[#1E1A16] border-[#3D352E] text-[#A89F91]'}">
+                                        ${opt}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            return '';
+        }
+
+        /* ============================================================================
+           PUZZLE INTERACTION HANDLERS
+           ============================================================================ */
+        function rotateAstrolabe(delta) {
+            playTone('click');
+            astrolabeAngle += delta;
+            renderStage(0);
+        }
+
+        function selectConstellation(id) {
+            playTone('click');
+            selectedConstellation = id;
+            renderStage(0);
+        }
+
+        function selectElder(id) {
+            playTone('click');
+            selectedElder = id;
+            renderStage(1);
+        }
+
+        function updateSeasonMatch(sceneId, val) {
+            playTone('click');
+            seasonMatches[sceneId] = val;
+        }
+
+        function moveDanceStep(index, direction) {
+            playTone('click');
+            const target = index + direction;
+            if (target < 0 || target >= danceOrder.length) return;
+            const temp = danceOrder[index];
+            danceOrder[index] = danceOrder[target];
+            danceOrder[target] = temp;
+            renderStage(3);
+        }
+
+        function toggleKidsMetal(metal) {
+            playTone('click');
+            kidsMetalsSelected[metal] = !kidsMetalsSelected[metal];
+            renderStage(4);
+        }
+
+        function updateShieldLayer(index, val) {
+            playTone('click');
+            shieldLayers[index] = val;
+        }
+
+        function selectRim(val) {
+            playTone('click');
+            selectedRimElement = val;
+            renderStage(4);
+        }
+
+        /* ============================================================================
+           VERIFICATION & PROGRESSION LOGIC
+           ============================================================================ */
+        function verifyStage(idx) {
+            const stages = getActiveStages();
+            let isCorrect = false;
+            let failMessage = "Η ανάλυση δεν συμφωνεί πλήρως με το ομηρικό κείμενο. Επανεξετάστε τα στοιχεία.";
+
+            if (idx === 0) {
+                const normalizedAngle = ((astrolabeAngle % 360) + 360) % 360;
+                if (normalizedAngle !== 0) {
+                    failMessage = "Ο ουράνιος αστρολάβος δεν είναι ακόμη ευθυγραμμισμένος στις 0° (Βορράς).";
+                } else if (selectedConstellation !== "ursa") {
+                    failMessage = "Ο αστερισμός που επιλέξατε δύει στον ορίζοντα. Αναζητήστε εκείνον που «μόνος αυτός δεν συμμετέχει στα λουτρά του Ωκεανού».";
+                } else {
+                    isCorrect = true;
+                }
+            } else if (idx === 1) {
+                if (!selectedElder) {
+                    failMessage = "Επιλέξτε πρώτα μία από τις διαθέσιμες απαντήσεις.";
+                } else if (
+                    (currentDifficulty === 'kids' && selectedElder === 'kids_correct') ||
+                    (currentDifficulty === 'teens' && selectedElder === 'teen_correct') ||
+                    (currentDifficulty === 'adults' && selectedElder === 'elder3')
+                ) {
+                    isCorrect = true;
+                } else {
+                    failMessage = "Η επιλογή αυτή οδηγεί σε αυθαιρεσία ή αιματοχυσία, καταλύοντας τη δικαιοσύνη της ειρηνικής πόλης.";
+                }
+            } else if (idx === 2) {
+                if (seasonMatches[0] === "B" && seasonMatches[1] === "D" && seasonMatches[2] === "A" && seasonMatches[3] === "C") {
+                    isCorrect = true;
+                } else {
+                    failMessage = "Κάποιες από τις αγροτικές σκηνές δεν αντιστοιχούν στα σωστά ομηρικά τελετουργικά ή μέταλλα.";
+                }
+            } else if (idx === 3) {
+                const currentSequence = danceOrder.map(s => s.id).join("");
+                const expectedSequence = currentDifficulty === 'kids' ? "abc" : (currentDifficulty === 'teens' ? "abcd" : "abcde");
+                if (currentSequence === expectedSequence) {
+                    isCorrect = true;
+                } else {
+                    failMessage = "Η σειρά των κινήσεων του χορού δεν ακολουθεί τη ροή της ομηρικής περιγραφής.";
+                }
+            } else if (idx === 4) {
+                if (currentDifficulty === 'kids') {
+                    const hasRightMetals = kidsMetalsSelected["Χαλκός"] && kidsMetalsSelected["Χρυσός"] && kidsMetalsSelected["Κασσίτερος"] && !kidsMetalsSelected["Σίδηρος"];
+                    if (!hasRightMetals) {
+                        failMessage = "Επιλέξτε ακριβώς τα 3 μέταλλα που αναφέρει ο Όμηρος (Χαλκό, Χρυσό, Κασσίτερο), χωρίς τον Σίδηρο.";
+                    } else if (selectedRimElement !== "Τον Ποταμό Ωκεανό") {
+                        failMessage = "Επιλέξτε ποιο μεγάλο ποτάμι έβαλε ο Ήφαιστος γύρω από την εξωτερική άντυγα.";
+                    } else {
+                        isCorrect = true;
+                    }
+                } else {
+                    const expectedLayers = ["Χαλκός", "Χαλκός", "Χρυσός", "Κασσίτερος", "Κασσίτερος"];
+                    const layersMatch = shieldLayers.every((val, i) => val === expectedLayers[i]);
+                    if (!layersMatch) {
+                        failMessage = "Η σειρά των 5 μεταλλικών πτυχών δεν συμφωνεί με τη ραψωδία Υ (2 εξωτερικές χαλκού, 1 μεσαία χρυσού, 2 εσωτερικές κασσιτέρου).";
+                    } else if (selectedRimElement !== "Τον Ποταμό Ωκεανό") {
+                        failMessage = "Επιλέξτε το κοσμικό στοιχείο που τοποθετήθηκε στην εξωτερική άντυγα της ασπίδας.";
+                    } else {
+                        isCorrect = true;
+                    }
+                }
+            }
+
+            if (!isCorrect) {
+                playTone('error');
+                showToast(failMessage, "error");
+                return;
+            }
+
+            // Stage Solved!
+            playTone('unlock');
+            unlockedRings[idx] = true;
+            document.getElementById('codex-badge').classList.remove('hidden');
+            renderCodex();
+            updateShieldSVG();
+            renderShieldPills();
+
+            showToast(`Εξαιρετικά! Ο ${stages[idx].shortTitle} σφυρηλατήθηκε και καταγράφηκε στο Σημειωματάριο.`, "success");
+
+            if (idx < 4) {
+                setTimeout(() => {
+                    renderStage(idx + 1);
+                }, 950);
+            } else {
+                setTimeout(() => {
+                    completeQuest();
+                }, 1100);
+            }
+        }
+
+        function completeQuest() {
+            clearInterval(timerInterval);
+            document.getElementById('game-workspace').classList.add('hidden');
+            document.getElementById('victory-screen').classList.remove('hidden');
+
+            const mins = String(Math.floor(elapsedSeconds / 60)).padStart(2, '0');
+            const secs = String(elapsedSeconds % 60).padStart(2, '0');
+            document.getElementById('stat-time').textContent = `${mins}:${secs}`;
+            document.getElementById('stat-hints').textContent = hintsUsedCount;
+
+            const meta = DIFFICULTY_META[currentDifficulty];
+            const rank = hintsUsedCount === 0 ? meta.rankSuccess : meta.rankGood;
+            document.getElementById('stat-rank').textContent = rank;
+
+            const stages = getActiveStages();
+            const summaryList = document.getElementById('victory-summary-list');
+            summaryList.innerHTML = stages.map(st => `
+                <div class="p-3 rounded-lg bg-[#1E1A16] border border-[#D4AF37]/20">
+                    <span class="font-cinzel font-bold text-[#D4AF37] block mb-0.5">${st.title}</span>
+                    <span>${st.loreSummary}</span>
+                </div>
+            `).join('');
+        }
+
+        /* ============================================================================
+           CODEX / ARCHAEOLOGICAL JOURNAL DRAWER
+           ============================================================================ */
+        function toggleCodex() {
+            playTone('click');
+            const drawer = document.getElementById('codex-drawer');
+            drawer.classList.toggle('hidden');
+            if (!drawer.classList.contains('hidden')) {
+                document.getElementById('codex-badge').classList.add('hidden');
+            }
+        }
+
+        function renderCodex() {
+            const stages = getActiveStages();
+            const container = document.getElementById('codex-entries');
+            const unlockedCount = unlockedRings.filter(Boolean).length;
+            if (unlockedCount === 0) {
+                container.innerHTML = `
+                    <div class="p-4 rounded-xl bg-[#12100E] border border-[#D4AF37]/15 text-xs text-[#A89F91] text-center">
+                        Το Σημειωματάριό σας είναι ακόμη κενό. Καθώς αποκρυπτογραφείτε κάθε κύκλο της ασπίδας, εδώ θα καταγράφονται οι αρχαιολογικές και φιλολογικές ανακαλύψεις σας.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = stages.map((st, idx) => {
+                if (!unlockedRings[idx]) return '';
+                return `
+                    <div class="p-4 rounded-xl bg-[#12100E] border border-[#D4AF37]/30 space-y-1.5">
+                        <span class="text-[10px] font-cinzel uppercase tracking-wider text-[#CD7F32]">${st.shortTitle} • Καταγραφή</span>
+                        <h4 class="font-cinzel font-bold text-sm text-[#D4AF37]">${st.codexEntry.title}</h4>
+                        <p class="font-serif-narrative text-xs text-[#EFECE6]/90 leading-relaxed">${st.codexEntry.body}</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        /* ============================================================================
+           TOAST NOTIFICATIONS & CLIPBOARD EXPORT
+           ============================================================================ */
+        let toastTimeout = null;
+        function showToast(msg, type = "info") {
+            const toast = document.getElementById('feedback-toast');
+            const icon = document.getElementById('toast-icon');
+            const text = document.getElementById('toast-message');
+
+            toast.className = "fixed bottom-6 left-1/2 -translate-x-1/2 z-50 max-w-md w-[92%] px-5 py-4 rounded-xl shadow-2xl border transition-all duration-300 ";
+            if (type === "success") {
+                toast.className += "bg-[#1A261D] border-[#4ADE80]/50 text-[#DCFCE7]";
+                icon.innerHTML = "✦";
+            } else if (type === "error") {
+                toast.className += "bg-[#2B1614] border-[#C84B31] text-[#FEE2E2]";
+                icon.innerHTML = "⚠";
+            } else {
+                toast.className += "bg-[#27221D] border-[#D4AF37] text-[#EFECE6]";
+                icon.innerHTML = "ℹ";
+            }
+
+            text.textContent = msg;
+            toast.classList.remove('hidden');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4200);
+        }
+
+        function copyCertificateSummary() {
+            const timeText = document.getElementById('stat-time').textContent;
+            const rankText = document.getElementById('stat-rank').textContent;
+            const levelTitle = DIFFICULTY_META[currentDifficulty].fullTitle;
+            const summaryText = `ΠΙΣΤΟΠΟΙΗΤΙΚΟ ΑΡΧΑΙΟΛΟΓΙΚΗΣ ΑΝΑΖΗΤΗΣΗΣ\n«Το Κρυμμένο Όπλο του Ηφαίστου: Η Ασπίδα του Αχιλλέα»\n${levelTitle}\nΒαθμίδα: ${rankText}\nΧρόνος Ολοκλήρωσης: ${timeText}\nΑποκρυπτογραφήθηκαν και οι 5 ομόκεντροι κύκλοι της ομηρικής ασπίδας (Ιλιάδα, Ραψωδία Σ).`;
+
+            const tempArea = document.createElement('textarea');
+            tempArea.value = summaryText;
+            document.body.appendChild(tempArea);
+            tempArea.select();
+            try {
+                document.execCommand('copy');
+                document.getElementById('copy-btn-text').textContent = "Αντιγράφηκε επιτυχώς!";
+                setTimeout(() => {
+                    document.getElementById('copy-btn-text').textContent = "Αντιγραφή Πιστοποιητικού Έρευνας";
+                }, 2500);
+            } catch (err) {
+                showToast("Δεν ήταν δυνατή η αυτόματη αντιγραφή.", "error");
+            }
+            document.body.removeChild(tempArea);
+        }
+    </script>
+</body>
+</html>

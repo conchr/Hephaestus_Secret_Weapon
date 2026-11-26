@@ -1,0 +1,12 @@
+# Temporary test/debug files
+.tmp*
+*.log
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependencies/build output (not currently used)
+node_modules/
+dist/
